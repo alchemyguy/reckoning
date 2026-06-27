@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { CriticalAnalysisSchema } from '../src/schemas/critical';
+import { PraiseAnalysisSchema } from '../src/schemas/praise';
 
 function fixture(name: string): unknown {
   return JSON.parse(
@@ -11,6 +12,14 @@ function fixture(name: string): unknown {
 describe('CriticalAnalysisSchema', () => {
   it('accepts the forge-pulse critical fixture', () => {
     const result = CriticalAnalysisSchema.safeParse(fixture('critical-v1.json'));
+    if (!result.success) console.error(result.error.issues);
+    expect(result.success).toBe(true);
+  });
+});
+
+describe('PraiseAnalysisSchema', () => {
+  it('accepts the forge-pulse praise fixture', () => {
+    const result = PraiseAnalysisSchema.safeParse(fixture('praise-v1.json'));
     if (!result.success) console.error(result.error.issues);
     expect(result.success).toBe(true);
   });

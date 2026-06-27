@@ -1,0 +1,242 @@
+{
+  "id": "praise-001",
+  "projectId": "forge-pulse-fast-feedback-team-heartbeat",
+  "prdVersion": "v1",
+  "createdAt": "2026-02-20T16:45:00Z",
+  "modelUsed": "claude-3-7-sonnet-20250219",
+  "strengths": [
+    {
+      "id": "strength-001",
+      "prdSectionId": "problem",
+      "title": "Problem statement is empirically grounded with converging evidence from multiple independent sources",
+      "detail": "The problem statement cites four distinct pain points, each backed by specific research findings with quantitative data: 40-50% action item completion rates (finding-007), recurring themes coming back repeatedly (finding-008), psychological safety as the #1 barrier with people failing to bring up real issues (finding-006), and inability to track team health trends over time (finding-010). Each claim is independently validated by different sources.",
+      "whyItWorks": "The convergence of independent evidence makes the problem undeniable. The 40-50% completion rate isn't someone's opinion—it's usage data from Easy Agile TeamRhythm. The psychological safety barrier is documented by both Mountain Goat Software and Scrum.org. This multi-source validation makes it nearly impossible to dismiss the problem as anecdotal or niche. The compounding cycle articulated at the end ('low psychological safety → shallow feedback → low action completion → recurring issues → declining morale') shows systems thinking that explains why isolated solutions fail.",
+      "evidence": "Problem section cites finding-006 (psychological safety), finding-007 (40-50% completion crisis, two-thirds implement <25% of ideas), finding-008 (recurring themes), finding-010 (can't tell if morale improving/declining). Each finding comes from different authoritative sources in the agile community.",
+      "strengthLevel": "strong",
+      "doNotRegress": true
+    },
+    {
+      "id": "strength-002",
+      "prdSectionId": "problem",
+      "title": "Quantitative baselines establish clear improvement targets",
+      "detail": "Rather than vague complaints about 'poor retrospectives', the PRD establishes measurable baselines: 40-50% action item completion (with 80-100% as target), two-thirds of teams implementing <25% of retro ideas, and completion improving to only 65% even with visibility features. These numbers create concrete targets for success measurement.",
+      "whyItWorks": "Specific baselines enable falsifiable hypotheses. If Forge Pulse launches and teams still have 45% completion rates, you know it failed. If completion hits 75-80%, you have evidence of impact. The research showing that visibility features only improved completion from 40-50% to 65% is particularly valuable—it proves that transparency alone isn't sufficient, suggesting that Forge Pulse's additional features (auto-carry, permanent anonymity) might be necessary to reach the 80%+ target.",
+      "evidence": "Problem section states: 'Action item completion rates are shockingly low - teams complete only 40-50% of retrospective action items. After implementing visibility features, this improved to 65%, still well below the 80-100% target.' This comes from finding-007 with Easy Agile TeamRhythm usage data and PMI community poll showing two-thirds implement <25% of ideas.",
+      "strengthLevel": "strong",
+      "doNotRegress": true
+    },
+    {
+      "id": "strength-003",
+      "prdSectionId": "personas",
+      "title": "Personas are dimensioned with empirical behavioral data rather than fictional archetypes",
+      "detail": "The personas include specific, research-backed behavioral patterns: average 6 people per retrospective board (finding-010), 60-90 minute timeboxing standard (finding-018), participants who don't speak early remain silent for the entire meeting (finding-030), and optimal team size of 5-10 with sweet spot at 4-5 members (finding-019). These aren't hypothetical—they're observable patterns.",
+      "whyItWorks": "Empirically-grounded personas create actionable design constraints. Knowing that 'participants who don't speak early remain silent' directly validates the 'Fast Capture' feature priority—if users don't contribute within the first few minutes, you've lost them. The 60-90 minute timebox isn't a preference, it's the Scrum Guide standard, meaning Forge Pulse must enable complete retrospectives within this constraint. The 6-person average participant count informs UI design (how many concurrent notes can the screen handle?) and WebSocket capacity planning.",
+      "evidence": "Personas section cites finding-019 (team size 5-10, optimal 4-5), finding-010 (average 6 participants per board), finding-018 (60-90 minute timebox standard), and finding-030 (early participation critical, silent participants remain silent). Each citation ties persona behavior to research evidence.",
+      "strengthLevel": "strong",
+      "doNotRegress": true
+    },
+    {
+      "id": "strength-004",
+      "prdSectionId": "scope",
+      "title": "Scope articulates what NOT to build with equal precision as what to build",
+      "detail": "The out-of-scope section lists 12 specific exclusions with rationale: no cross-team analytics (fully isolated teams only), no third-party integrations in MVP despite finding-022 showing it's expected, no async/distributed support despite finding-032 showing 65% of distributed teams have inequities, no multiple templates despite finding-009 showing format staleness, no AI features, no mobile apps, no enterprise features. Each exclusion is a deliberate strategic choice.",
+      "whyItWorks": "Explicit exclusions prevent scope creep and create falsifiable commitments. Saying 'no cross-team analytics' means if someone suggests comparing Team A vs Team B velocity during MVP development, there's a documented decision to reference. The founder's preference to 'start fresh' without integrations (finding-022) is captured and justified. The exclusion of async features despite 65% of distributed teams facing inequities (finding-032) is risky but documented. This level of precision makes the PRD a forcing function for focus.",
+      "evidence": "Scope section lists 12 explicit out-of-scope items including: 'Cross-team analytics or comparisons (fully isolated teams only)', 'Third-party integrations (Jira, Linear, Slack, etc.) - starting fresh', 'Asynchronous/distributed retrospective support (live meetings only)', 'Multiple retrospective format templates'. Each has implications cited in research (finding-022 for integrations, finding-032 for async).",
+      "strengthLevel": "strong",
+      "doNotRegress": true
+    },
+    {
+      "id": "strength-005",
+      "prdSectionId": "scope",
+      "title": "MVP timeline constraints force prioritization discipline",
+      "detail": "The 1-2 month timeline is aggressive (finding-020 shows simple products take 1-3 months, real-time features add 2-3 weeks) but creates a hard constraint that prevents feature bloat. The in-scope features are minimal: anonymous notes, upvotes, basic categorization, action tracking with auto-carry, historical timeline, facilitator controls, and timer. No AI, no templates, no integrations, no async support.",
+      "whyItWorks": "Artificial scarcity forces ruthless prioritization. A 2-month deadline means you can't build 80 templates like TeamRetro—you build one simple format. You can't build AI clustering suggestions—you rely on manual grouping. The timeline creates a natural forcing function: 'Is this feature essential enough to delay launch by 2 weeks?' becomes the filter. The research validation that simple products can ship in 1-3 months (finding-020) makes the timeline credible, not fantasy.",
+      "evidence": "Scope section states '1-2 month timeline' with citation to finding-020: 'Validates 1-2 month MVP timeline as aggressive but achievable, with simple products taking 1-3 months'. The in-scope features are minimal: Fast Capture, Action Pulse, Heartbeat Timeline, Essential Facilitation Features only. All advanced features (AI, templates, integrations, mobile) explicitly excluded.",
+      "strengthLevel": "notable",
+      "doNotRegress": false
+    },
+    {
+      "id": "strength-006",
+      "prdSectionId": "success_metrics",
+      "title": "Success criteria distinguish between 12-month outcomes and MVP validation signals",
+      "detail": "The metrics section separates long-term success (6+ months retention, 80%+ action completion, recurring theme reduction) from MVP validation metrics (2-5 internal teams adopting within 2 weeks, 5+ notes per member per retro, 3+ consecutive retros completed, <5 minute setup time). This prevents premature optimization and establishes staged validation gates.",
+      "whyItWorks": "Staged metrics create decision checkpoints. You don't try to measure 'team health improvement' in month 1—that requires 3+ months of data. But you do measure whether internal teams actually use it for 3+ consecutive retros, which signals whether it's solving a real problem. The 'leading indicators' concept (80%+ week-over-week retention in first month as predictor of long-term retention) shows sophisticated thinking about early signals. The anti-metrics section ('What NOT to optimize for') prevents perverse incentives like feature bloat or gamification of note counts.",
+      "evidence": "Success metrics section has distinct '12-Month Success Criteria' (6+ months retention, <5% monthly churn, 80%+ action completion, recurring theme reduction) versus 'MVP Validation Metrics (1-2 months, internal teams)' (2-5 teams adopt within 2 weeks, 5+ notes per member, 3+ consecutive retros, <5 minute setup). Also includes 'Anti-Metrics' section: 'Number of features shipped (avoiding feature bloat), Time spent in retrospectives (efficiency is good, but depth matters more), Number of notes created (quality over quantity)'.",
+      "strengthLevel": "strong",
+      "doNotRegress": true
+    },
+    {
+      "id": "strength-007",
+      "prdSectionId": "success_metrics",
+      "title": "Anti-metrics section prevents optimization for wrong outcomes",
+      "detail": "The PRD explicitly lists what NOT to measure: number of features shipped (avoiding feature bloat), time spent in retrospectives (efficiency matters but depth more), number of notes created (quality over quantity), and cross-team velocity comparisons (not building surveillance tool). Each anti-metric addresses a known trap.",
+      "whyItWorks": "Anti-metrics are rare and valuable because they prevent predictable failure modes. 'Number of features shipped' as anti-metric directly counters the competitive pressure from TeamRetro's 80+ templates and Echometer's 'hundreds of retrospective ideas'. It's a commitment to say 'we will not compete on feature breadth'. The cross-team comparison anti-metric prevents mission drift toward becoming a performance management tool, which would destroy psychological safety—the core value proposition.",
+      "evidence": "Success metrics section includes explicit 'Anti-Metrics (What NOT to optimize for)' subsection listing: 'Number of features shipped (avoiding feature bloat), Time spent in retrospectives (efficiency is good, but depth matters more), Number of notes created (quality over quantity), Cross-team comparisons or velocity metrics (not building performance surveillance tool)'.",
+      "strengthLevel": "notable",
+      "doNotRegress": false
+    },
+    {
+      "id": "strength-008",
+      "prdSectionId": "user_stories",
+      "title": "User stories include explicit acceptance criteria rather than vague requirements",
+      "detail": "Each user story has concrete, testable acceptance criteria. Example: Story #1 (anonymous feedback) requires 'Notes submitted have no authorship metadata stored, even facilitator cannot see who wrote what' and 'Interface provides clear confirmation that submission is anonymous'. Story #4 (fast capture) requires 'Can submit note in <10 seconds from typing to confirmation'. Story #9 (action item enforcement) requires 'Cannot close/complete retro without creating at least one action'.",
+      "whyItWorks": "Testable acceptance criteria convert stories into QA checklists and prevent interpretation drift. 'Anonymous feedback' is vague—does the facilitator see author names? The acceptance criteria answer this: 'even facilitator cannot see who wrote what'. The '<10 seconds from typing to confirmation' criterion for fast capture is measurable during usability testing. The 'cannot close retro without at least one action' is implementable as a form validation rule. These aren't aspirations, they're specifications.",
+      "evidence": "User stories section includes detailed acceptance criteria for each story. Examples: Story #1 'Acceptance: Notes submitted have no authorship metadata stored, even facilitator cannot see who wrote what', Story #4 'Acceptance: Can submit note in <10 seconds from typing to confirmation', Story #9 'Acceptance: Cannot close/complete retro without creating at least one action'.",
+      "strengthLevel": "solid",
+      "doNotRegress": false
+    },
+    {
+      "id": "strength-009",
+      "prdSectionId": "user_stories",
+      "title": "Edge cases and constraints are surfaced as explicit user stories rather than hidden",
+      "detail": "Stories #13 and #14 address the technical tension between anonymity and duplicate vote prevention: 'As a facilitator, I want to prevent duplicate voting by same person so that results reflect genuine consensus' with note that 'Technical challenge: must prevent duplicate voting while maintaining anonymity (finding-014 notes this creates possibility for voting abuse)'. Story #14 addresses permanence: 'Even database administrators cannot reverse-engineer authorship'.",
+      "whyItWorks": "Surfacing constraints as user stories forces teams to confront tradeoffs early. The duplicate voting challenge isn't buried in technical considerations—it's elevated to a user story because it impacts trust and product integrity. The explicit statement that 'finding-014 notes this creates possibility for voting abuse' acknowledges that perfect anonymity and perfect vote integrity are in tension. This prevents magical thinking and forces the team to choose: accept some vote manipulation risk, or compromise on anonymity. The decision to accept manipulation risk is documented.",
+      "evidence": "User stories section includes Stories #13 and #14 explicitly about constraints: Story #13 'As a facilitator, I want to prevent duplicate voting by same person so that results reflect genuine consensus - Acceptance: Technical challenge: must prevent duplicate voting while maintaining anonymity (finding-014 notes this creates possibility for voting abuse)'. Story #14 'Acceptance: Even database administrators cannot reverse-engineer authorship'.",
+      "strengthLevel": "notable",
+      "doNotRegress": false
+    },
+    {
+      "id": "strength-010",
+      "prdSectionId": "technical_considerations",
+      "title": "Technical architecture decisions are justified with research citations and risk acknowledgments",
+      "detail": "The tech stack recommendations cite specific findings: WebSocket for real-time collaboration (finding-011), React vs Vue both viable with mature drag-and-drop libraries (finding-012), Node.js + Socket.io for backend (finding-011), PostgreSQL for structured data. Each recommendation includes rationale (e.g., 'WebSocket reduces latency vs. HTTP polling') and cites competitor precedent (e.g., 'Retrospected uses React Beautiful DND' from finding-012).",
+      "whyItWorks": "Justified technology choices prevent architecture debates and provide audit trail. If someone suggests 'why not use Firebase instead of PostgreSQL?', the PRD documents the decision: structured data for action tracking and timeline queries favors relational database. If someone questions WebSocket overhead, the PRD cites that it's 'standard for real-time collaboration' (finding-011) and used by Google Docs, Slack, Trello. The acknowledgment of 'Known Technical Risks' (anonymous voting complexity, WebSocket scaling, real-time debugging challenges, forensic gap for malicious content) shows mature technical thinking.",
+      "evidence": "Technical considerations section cites finding-011 for WebSocket standard, finding-012 for React Beautiful DND used by Retrospected, recommends 'Node.js + Express + Socket.io' for backend and 'PostgreSQL (structured data, good for action tracking and timeline queries)' for database. Includes 'Known Technical Risks' subsection listing 4 specific risks including 'Anonymous voting without duplicate prevention is technically complex' and 'Permanent anonymity creates forensic challenge if malicious content posted'.",
+      "strengthLevel": "solid",
+      "doNotRegress": false
+    },
+    {
+      "id": "strength-011",
+      "prdSectionId": "technical_considerations",
+      "title": "GDPR compliance requirements are identified early with specific implementation guidance",
+      "detail": "The technical section addresses GDPR explicitly: storage limitation principle, data minimization (finding-013), encryption at rest and in transit, never storing authorship metadata, recommendation to auto-delete retros older than 12 months unless team preserves. The privacy policy requirement is specified: 'Authorship is NEVER stored, cannot be recovered even by administrators'.",
+      "whyItWorks": "Early GDPR consideration prevents costly rework. The decision to 'NEVER store authorship metadata in database, not even encrypted' has architectural implications—you can't add a 'show who wrote what' feature later without rebuilding the data model. The auto-delete recommendation (12 months) addresses GDPR's storage limitation principle while preserving the Heartbeat Timeline's value. The specific privacy policy language ('cannot be recovered even by administrators') sets user expectations and creates legal commitments that marketing must honor.",
+      "evidence": "Technical considerations section states: 'Critical constraint: NEVER store authorship metadata in database, not even encrypted' and 'GDPR compliance required: storage limitation principle, data minimization' citing finding-013. Includes 'Privacy policy must state: Authorship is NEVER stored, cannot be recovered even by administrators' and 'Recommendation: Implement data retention policies (e.g., auto-delete retros older than 12 months unless team explicitly preserves)'.",
+      "strengthLevel": "notable",
+      "doNotRegress": false
+    },
+    {
+      "id": "strength-012",
+      "prdSectionId": "risks_and_open_questions",
+      "title": "Risks are prioritized by severity and include specific mitigation strategies",
+      "detail": "The risks section categorizes risks as HIGH-PRIORITY (7 risks), MEDIUM-PRIORITY (3 risks), and LOW-PRIORITY (3 risks). Each high-priority risk includes research citation, mitigation strategy, and open question. Example: Risk #2 (free competitor dominance) cites finding-002 and finding-003, mitigation is 'Focus on differentiation (Heartbeat Timeline, permanent anonymity, action auto-carry) rather than feature parity', open question is 'What would teams pay for that free tools don't provide?'.",
+      "whyItWorks": "Prioritized risks with mitigations create actionable risk management. Labeling 'Anonymity vs. Accountability Tension' as CRITICAL (Risk #1) signals to the team that this isn't a nice-to-have design polish—it's existential. The mitigation ('Separate anonymous feedback from accountable actions, accept that action creation happens in facilitated discussion') shows the team has thought through the tradeoff rather than hoping it resolves itself. The open questions ('Will teams create actions from anonymous feedback, or will anonymity reduce action quality?') identify what user research must answer.",
+      "evidence": "Risks section explicitly categorizes: 'HIGH-PRIORITY RISKS' (7 risks including 'Anonymity vs. Accountability Tension' marked CRITICAL), 'MEDIUM-PRIORITY RISKS' (3 risks), 'LOW-PRIORITY RISKS' (3 risks). Each high-priority risk includes 'Risk:', 'Research:', 'Mitigation:', and 'Open question:' subsections. Example Risk #2 cites finding-002 and finding-003 for free competitor dominance.",
+      "strengthLevel": "strong",
+      "doNotRegress": true
+    },
+    {
+      "id": "strength-013",
+      "prdSectionId": "risks_and_open_questions",
+      "title": "Open questions section separates user research needs from product decisions",
+      "detail": "The PRD includes 7 'OPEN QUESTIONS REQUIRING USER RESEARCH' separate from risks: Do teams actually want 6+ months of history or is it overload? What action item metadata is necessary? How do teams currently track actions? What percentage already use dedicated tools? Will the 'cannot close without action' guardrail create resentment? Does permanent anonymity increase or decrease psychological safety over time? What does team health improvement look like in practice?",
+      "whyItWorks": "Separating 'unknowns we must research' from 'risks we must mitigate' creates clear research agenda. The question 'Do teams actually want to see 6+ months of retrospective history, or is this information overload?' identifies that the Heartbeat Timeline—a core differentiator—is untested. This prevents false confidence. The question 'How do teams currently track action items - in retro tool, in Jira, in Google Sheets, or not at all?' informs whether the 'start fresh without integrations' decision (scope section) will create adoption friction. These aren't rhetorical—they're hypotheses to test with the 2-5 internal teams during MVP validation.",
+      "evidence": "Risks section includes separate 'OPEN QUESTIONS REQUIRING USER RESEARCH' with 7 specific questions including: 'Do teams actually want to see 6+ months of retrospective history, or is this information overload?', 'Will cannot close retro without at least one action guardrail create resentment?', 'Does permanent anonymity reduce or increase psychological safety over time?', 'What does team health improvement look like in practice - how would teams describe success?'.",
+      "strengthLevel": "notable",
+      "doNotRegress": false
+    },
+    {
+      "id": "strength-014",
+      "prdSectionId": "assumptions_explicit",
+      "title": "Assumptions are documented with validation status and research citations",
+      "detail": "The PRD lists 22 explicit assumptions across user behavior (5), technical (4), market (4), business model (3), regulatory (2), and scope (4). Each assumption includes validation status. Example: Assumption #2 'Permanently anonymous feedback will increase honesty without reducing accountability for actions (assumption based on finding-006 and finding-016 showing 74% of workers more willing to share anonymously, but not proven in agile retro context)'.",
+      "whyItWorks": "Documented assumptions with validation status prevent teams from confusing hypotheses with facts. The assumption that 'Startup engineering teams will adopt a new retrospective tool if it demonstrably improves psychological safety' is marked as 'not validated - assumes pain points are severe enough to overcome switching costs'. This is intellectually honest. The assumption about anonymity increasing honesty cites finding-016 (74% of workers more willing to share anonymously) but notes 'not proven in agile retro context'—the research is from HR surveys, not sprint retrospectives. This prevents overgeneralizing from adjacent domains.",
+      "evidence": "Assumptions section lists 22 explicit assumptions with validation status. Example: '#2 Permanently anonymous feedback will increase honesty without reducing accountability for actions (assumption based on finding-006 and finding-016 showing 74% of workers more willing to share anonymously, but not proven in agile retro context)'. Another example: '#10 Internal validation with 2-5 teams provides sufficient signal for external launch decisions (assumption - no data on how many teams needed for statistically significant validation)'.",
+      "strengthLevel": "strong",
+      "doNotRegress": true
+    },
+    {
+      "id": "strength-015",
+      "prdSectionId": "contradictionsFlagged",
+      "title": "Internal contradictions are surfaced explicitly rather than hidden",
+      "detail": "The PRD includes 6 flagged contradictions between product decisions and research findings. Example: 'Founder wants focused simplicity but finding-005 shows TeamRetro praised for feature richness at good price point - suggests market may value breadth over focus'. Another: 'Scope excludes async features (live meetings only) but finding-032 shows 65% of distributed teams face participation inequities - may exclude significant portion of target market'.",
+      "whyItWorks": "Explicitly flagging contradictions prevents selective attention to confirming evidence. The contradiction between 'focused simplicity' strategy and TeamRetro's market success with feature breadth (finding-005: 'there is no other product on the market that delivers this number of features at this level of quality at this price') forces the team to acknowledge they're making a contrarian bet. The async exclusion contradiction (65% of distributed teams have time zone inequities per finding-032) means the MVP deliberately ignores a majority use case. This might be correct (focus on niche), but it's not an oversight—it's a documented strategic choice.",
+      "evidence": "PRD includes 'contradictionsFlagged' array with 6 items. Examples: 'Founder wants focused simplicity but finding-005 shows TeamRetro praised for feature richness - suggests market may value breadth over focus', 'Scope excludes async features (live meetings only) but finding-032 shows 65% of distributed teams face participation inequities - may exclude significant portion of target market', 'Anonymity is core differentiator but finding-014 shows technical complexity of preventing vote manipulation - may need to compromise on complete anonymity promise'.",
+      "strengthLevel": "strong",
+      "doNotRegress": true
+    },
+    {
+      "id": "strength-016",
+      "prdSectionId": "problem",
+      "title": "Problem statement articulates causal cycle rather than isolated symptoms",
+      "detail": "The problem section concludes with a systems view: 'These problems compound over time: low psychological safety → shallow feedback → low action completion → recurring issues → declining morale → even lower psychological safety. Teams need a way to break this cycle.' This moves beyond listing pain points to explaining why they persist.",
+      "whyItWorks": "Causal loop thinking explains why isolated solutions fail and why the problem is durable. If you only fix action tracking (like Easy Agile did, getting completion from 40-50% to 65%), you don't break the cycle—people still don't speak up, so actions address symptoms not root causes. If you only add anonymity, actions still don't get completed, so recurring issues persist and erode trust in the process. The causal cycle implies that Forge Pulse's combination of anonymity + action tracking + historical visibility is necessary, not nice-to-have. This is load-bearing reasoning.",
+      "evidence": "Problem section final paragraph: 'These problems compound over time: low psychological safety → shallow feedback → low action completion → recurring issues → declining morale → even lower psychological safety. Teams need a way to break this cycle.' This appears after listing the four core retrospective failures, providing synthesis.",
+      "strengthLevel": "notable",
+      "doNotRegress": true
+    },
+    {
+      "id": "strength-017",
+      "prdSectionId": "scope",
+      "title": "Non-goals section distinguishes between temporal exclusions and philosophical boundaries",
+      "detail": "The NON-GOALS subsection clarifies strategic boundaries: 'Not building a general collaboration platform (retro-specific only)', 'Not targeting enterprise teams or large organizations (startup focus)', 'Not competing on feature breadth (competing on focused simplicity)', 'Not trying to replace existing project management tools', 'Not attempting to solve async/distributed team challenges in MVP'. These aren't 'not yet', they're 'not ever' for this product vision.",
+      "whyItWorks": "Non-goals prevent mission creep and establish product identity. 'Not competing on feature breadth' means even if TeamRetro's 80 templates are successful, Forge Pulse won't add 81 templates—it's a philosophical commitment to simplicity. 'Not trying to replace existing project management tools' means Jira/Linear integration (future) is about export, not replacement. 'Not targeting enterprise teams' means no SSO or admin controls—the product can stay small-team-optimized. These boundaries make the product defensible by creating clear differentiation.",
+      "evidence": "Scope section includes 'NON-GOALS' subsection with 5 items: 'Not building a general collaboration platform (retro-specific only)', 'Not targeting enterprise teams or large organizations (startup focus)', 'Not competing on feature breadth (competing on focused simplicity)', 'Not trying to replace existing project management tools', 'Not attempting to solve async/distributed team challenges in MVP'.",
+      "strengthLevel": "notable",
+      "doNotRegress": false
+    },
+    {
+      "id": "strength-018",
+      "prdSectionId": "all",
+      "title": "Every major claim includes research citation with finding ID and context",
+      "detail": "The PRD includes 82 citations across all sections. Each citation format includes findingId, context explaining relevance, confidence score, and flags noting uncertainties. Example from personas section: citation to finding-030 with context 'Documents that participants who don't speak early remain silent, and early participation is critical for engagement'. Flags are transparent about what's unknown.",
+      "whyItWorks": "Citation discipline creates audit trail and prevents authority inflation. When the problem statement claims 'teams complete only 40-50% of retrospective action items', the citation to finding-007 allows tracing back to Easy Agile TeamRhythm usage data and PMI community poll. If someone challenges the claim, you can defend it. The flags section on each section acknowledges gaps: 'No quantitative data on what percentage of startup engineering teams experience these specific problems vs. general agile teams'. This is intellectually honest and prevents overconfidence.",
+      "evidence": "Every PRD section includes 'citations' array with findingId, context, and sometimes confidence/flags. Example from problem section has 4 citations (findings 006, 007, 008, 010). Personas section has 5 citations (findings 019, 010, 018, 030, 009). Each section also includes 'confidence' score (0.75-0.95) and 'flags' array documenting uncertainties.",
+      "strengthLevel": "solid",
+      "doNotRegress": false
+    }
+  ],
+  "nonObviousInsights": [
+    {
+      "id": "insight-001",
+      "prdSectionId": "success_metrics",
+      "title": "Leading indicators are distinguished from lagging outcomes",
+      "detail": "The success metrics section doesn't just list goals—it identifies early signals that predict long-term success. Example: '80%+ week-over-week retention in first month' as leading indicator for 6+ month retention target. Another: 'Teams reference historical retros when planning actions (observable in action item descriptions)' as leading indicator for team health improvement.",
+      "whyNonObvious": "Most PRDs conflate metrics with goals. This PRD recognizes that measuring 'team health improvement' requires 3+ months of data, but you need earlier signals to know if you're on track. The insight that teams referencing past retros in action descriptions is a behavioral signal of engagement with the Heartbeat Timeline is sophisticated—it's not just 'did they click on old retros' but 'are they actually using historical context to improve'. This shows product sense."
+    },
+    {
+      "id": "insight-002",
+      "prdSectionId": "technical_considerations",
+      "title": "Anonymity implementation recognizes tradeoff between perfect privacy and vote integrity",
+      "detail": "The technical section explicitly states: 'Risk: Systems that don't track who is voting create possibility for voting abuse. Recommendation: Accept some vote manipulation risk in MVP to preserve pure anonymity, monitor for abuse patterns.' This is a conscious architectural choice with documented tradeoffs.",
+      "whyNonObvious": "Most products would try to have both perfect anonymity and perfect vote integrity. This PRD acknowledges the cryptographic complexity (finding-014: one-time ring signatures, blockchain approaches) and makes an explicit choice: prioritize anonymity, accept manipulation risk, monitor for abuse. This prevents the team from spending 4 weeks implementing ring signatures for MVP. The decision to revisit if abuse patterns emerge is pragmatic—don't solve problems that might not materialize."
+    },
+    {
+      "id": "insight-003",
+      "prdSectionId": "risks_and_open_questions",
+      "title": "Market churn risk is elevated based on competitor discontinuation evidence",
+      "detail": "Risk #7 cites finding-035 showing FunRetro, Fraankly, Retro Rabbit, ScatterSpoke, and Scrum Toolkit all discontinued/archived, and states: 'Risk: Finding-035 shows FunRetro, Fraankly, Retro Rabbit, ScatterSpoke, Scrum Toolkit all discontinued/archived. Open question: What causes retrospective tools to fail - lack of differentiation, insufficient value, or structural market issues?'",
+      "whyNonObvious": "This is non-obvious diligence. Most PRDs analyze successful competitors. This PRD analyzed failed competitors and discovered that the retrospective tool market has high churn. The open question about whether failures are due to 'lack of differentiation, insufficient value, or structural market issues' shows sophisticated thinking—if it's structural (e.g., teams don't value retro tools enough to pay), then Forge Pulse faces headwinds regardless of execution. The mitigation ('Focus on retention metrics from day 1, validate sustained usage with internal teams before external launch') is directly informed by this failure analysis."
+    },
+    {
+      "id": "insight-004",
+      "prdSectionId": "user_stories",
+      "title": "Action enforcement guardrail is treated as potentially controversial user story",
+      "detail": "Story #9 requires 'Cannot close/complete retro without creating at least one action' with flag: 'Unknown whether cannot close retro without at least one action guardrail will create resentment or force low-quality actions'. The PRD treats this as a hypothesis to test rather than obvious good practice.",
+      "whyNonObvious": "The insight is recognizing that forcing outcomes could backfire. The research shows action completion is low (40-50%), but that doesn't automatically mean teams want to be forced to create actions. Some retrospectives might legitimately conclude 'we're doing great, no changes needed'. The PRD acknowledges this tension and flags it for validation during internal testing. This prevents authoritarian product design disguised as 'best practices'."
+    },
+    {
+      "id": "insight-005",
+      "prdSectionId": "assumptions_explicit",
+      "title": "Research domain transfer risks are explicitly acknowledged",
+      "detail": "Assumption #2 about anonymous feedback cites finding-016 showing '74% of workers more willing to share anonymously' but notes 'not proven in agile retro context' because the research is from HR surveys, not sprint retrospectives. This acknowledges that evidence from adjacent domains might not transfer.",
+      "whyNonObvious": "Most PRDs would cite ' 74% more willing to share anonymously' as validation and move on. This PRD recognizes that HR feedback surveys are structurally different from sprint retrospectives—one is employee-to-management reporting, the other is peer-to-peer team improvement. The psychological dynamics differ (power distance vs. peer trust), so the 74% statistic might not hold. This domain-awareness prevents false confidence from overgeneralized research."
+    },
+    {
+      "id": "insight-006",
+      "prdSectionId": "technical_considerations",
+      "title": "GDPR data retention is positioned as feature opportunity not compliance burden",
+      "detail": "The technical section recommends 'auto-delete retros older than 12 months unless team explicitly preserves' to satisfy GDPR storage limitation principle. Rather than treating this as legal requirement, it's framed as maintaining signal-to-noise ratio in the Heartbeat Timeline.",
+      "whyNonObvious": "Most teams treat GDPR as compliance checkbox. This PRD recognizes that indefinite retention might create information overload in the Heartbeat Timeline—if teams see 3 years of retrospectives, can they still identify meaningful patterns? The auto-delete with opt-in preservation creates forcing function for teams to consciously decide 'this retrospective was important enough to preserve'. This turns regulatory constraint into product feature."
+    },
+    {
+      "id": "insight-007",
+      "prdSectionId": "scope",
+      "title": "Integration exclusion is defended despite competitive pressure",
+      "detail": "The scope section explicitly excludes Jira/Linear integration for MVP despite finding-022 documenting that 'integration is expected feature in competitive landscape'. The citation notes 'founder's preference to start fresh without integrations' and flags this may create adoption barrier.",
+      "whyNonObvious": "This is contrarian product strategy. Every competitor offers Jira integration (Parabol, Retrium, TeamRetro all have it), and the research confirms it's expected. The decision to exclude it anyway shows conviction that 'starting fresh' creates cleaner mental model—actions live in Forge Pulse, not exported to Jira. The acknowledgment that this 'may create adoption barrier' shows the team isn't naive about the tradeoff. This is defensible differentiation rather than feature gap."
+    }
+  ],
+  "overallAssessment": "This PRD demonstrates exceptional rigor in five key dimensions: (1) Empirical grounding - every major claim is backed by specific research with quantitative data and independent source validation, creating undeniable problem credibility. (2) Falsifiable commitments - explicit scope boundaries, anti-metrics, and acceptance criteria create concrete tests of success/failure rather than wiggle room. (3) Intellectual honesty - contradictions are surfaced, assumptions are documented with validation status, and domain transfer risks are acknowledged. (4) Systems thinking - the causal cycle articulation explains why isolated solutions fail and why the feature combination is necessary. (5) Decision traceability - citations create audit trail, risks have mitigations, and open questions separate what must be researched from what can be decided. The load-bearing strengths are the empirically-grounded problem statement (makes pain undeniable), the staged success metrics (prevents premature optimization), the explicit out-of-scope list (forces focus), and the prioritized risks with mitigations (creates actionable risk management). The non-obvious good decisions include recognizing the anonymity vs. vote integrity tradeoff and choosing a side, analyzing failed competitors to understand market churn risk, acknowledging research domain transfer risks, and defending the 'no integrations in MVP' decision despite competitive pressure. This PRD would be extremely difficult to regress into vague platitudes because the specificity is load-bearing.",
+  "confidence": 0.92
+}
