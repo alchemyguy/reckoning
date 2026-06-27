@@ -45,8 +45,8 @@ export function run(argv: string[]): { code: number; out: string } {
 // due to symlink resolution mismatches. We check if process.argv[1] ends with 'cli.ts'
 // (or 'cli.js' for compiled output) as a robust cross-platform fallback.
 const isDirectInvocation =
-  process.argv[1]?.endsWith('cli.ts') ||
-  process.argv[1]?.endsWith('cli.js') ||
+  process.argv[1]?.endsWith('/cli.ts') ||
+  process.argv[1]?.endsWith('/cli.js') ||
   import.meta.url === `file://${process.argv[1]}`;
 
 if (isDirectInvocation) {
