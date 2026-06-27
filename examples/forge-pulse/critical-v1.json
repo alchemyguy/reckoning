@@ -1,0 +1,331 @@
+{
+  "id": "critical-001",
+  "projectId": "forge-pulse-fast-feedback-team-heartbeat",
+  "prdVersion": "v1",
+  "createdAt": "2026-02-20T15:30:00Z",
+  "modelUsed": "claude-3-5-sonnet-20241022",
+  "failureModes": [
+    {
+      "id": "fm-001",
+      "prdSectionId": "technical_considerations",
+      "title": "Anonymous Voting Manipulation Will Destroy Trust in First Real Incident",
+      "consequence": "Without cryptographic vote prevention (finding-014 shows one-time ring signatures required), first time someone stuffs votes with 20+ upvotes on their own note, entire team loses faith in anonymity system. Based on human behavior in anonymous systems (Reddit, 4chan), expect gaming within first 3 retrospectives. When team realizes system can't prove who voted, they'll assume facilitator can see votes anyway, destroying psychological safety benefit—the core value prop.",
+      "severity": "critical",
+      "likelihood": "high",
+      "category": "failure_modes"
+    },
+    {
+      "id": "fm-002",
+      "prdSectionId": "scope",
+      "title": "1-2 Month Timeline With WebSocket, Real-Time Collaboration, and GDPR Compliance Is Fantasy",
+      "consequence": "Finding-020 shows simple products take 1-3 months, real-time features add 2-3 weeks. This PRD has: WebSocket infrastructure, anonymous voting cryptography, drag-and-drop UI, timer system, action tracking with auto-carry logic, historical timeline visualization, and GDPR compliance review. That's 4-6 months minimum with experienced team. At 8 weeks, you'll have 40% of MVP or technical debt that takes 6 months to unwind. Either timeline slips to 4-6 months (destroying team morale) or you ship broken anonymity (destroying user trust).",
+      "severity": "critical",
+      "likelihood": "high",
+      "category": "failure_modes"
+    },
+    {
+      "id": "fm-003",
+      "prdSectionId": "problem",
+      "title": "You're Solving Symptom (Low Action Completion) Not Root Cause (No Accountability Culture)",
+      "consequence": "Finding-007 shows even with visibility features, completion only reached 65% from 40-50%. The problem isn't tracking—it's that teams don't have authority to prioritize retro actions over product work. Forge Pulse gives perfect visibility into 35% of actions dying every sprint, making the failure MORE visible without fixing it. After 3 months, teams will blame the tool for 'highlighting our dysfunction' and churn. You can't software-engineer your way out of organizational culture.",
+      "severity": "high",
+      "likelihood": "high",
+      "category": "failure_modes"
+    },
+    {
+      "id": "fm-004",
+      "prdSectionId": "user_stories",
+      "title": "Mandatory Action Item Creates Resentment and Low-Quality Garbage Actions",
+      "consequence": "Story #9 says 'cannot close retro without creating at least one action.' When team has genuinely good sprint, they'll create fake action like 'Continue doing great work' to satisfy requirement. Within 5 retros, 'mandatory action' becomes team joke and corrupts action tracking data. Based on Goodhart's Law (when measure becomes target, it ceases to be good measure), forcing action creation trains teams to game the system, not improve.",
+      "severity": "high",
+      "likelihood": "high",
+      "category": "failure_modes"
+    },
+    {
+      "id": "fm-005",
+      "prdSectionId": "scope",
+      "title": "No Async Support Excludes 65% of Distributed Teams Per Finding-032",
+      "consequence": "Scope explicitly excludes async, targeting 'live meetings only.' Finding-032 shows 65% of distributed teams face participation inequities, and 1-hour time difference reduces collaboration by 37%. You're assuming all 2-5 internal test teams are fully co-located same timezone. If ANY team has remote member in even 1-hour different timezone (common in startups), tool fails for them. With remote work standard in 2026, this scope decision cuts addressable market by 50-70%.",
+      "severity": "high",
+      "likelihood": "medium",
+      "category": "failure_modes"
+    },
+    {
+      "id": "fm-006",
+      "prdSectionId": "success_metrics",
+      "title": "Can't Measure 'Team Health Improvement' Until Month 3, But Need Validation at Week 8",
+      "consequence": "Success criteria says 'team sentiment trends positive over 3+ month periods' and 'reduction in recurring themes across 3+ consecutive retros.' With 2-week sprints, that's 6 retros minimum = 12 weeks before ANY success signal. MVP timeline is 8 weeks. You'll launch, have no data for 4 weeks, then need 8 more weeks to see trends. By week 12 (3 months post-launch), you've already made all your MVP-to-v2 decisions based on gut feel, not data.",
+      "severity": "high",
+      "likelihood": "high",
+      "category": "failure_modes"
+    },
+    {
+      "id": "fm-007",
+      "prdSectionId": "risks_and_open_questions",
+      "title": "Free Competitor Dominance Means You're Building Features for GoRetro's Roadmap",
+      "consequence": "Finding-002 shows GoRetro fully free, ranked #1 on G2, unlimited users. Parabol free for 2 teams. You're planning to build Heartbeat Timeline as differentiator—development cost $40-60K (assuming 2 engineers × 4 weeks × $75/hr). Once proven valuable, GoRetro copies it in 6 weeks. You have zero IP protection, zero network effects, zero lock-in. You're doing free R&D for competitors with 10x your resources.",
+      "severity": "high",
+      "likelihood": "high",
+      "category": "failure_modes"
+    },
+    {
+      "id": "fm-008",
+      "prdSectionId": "personas",
+      "title": "Individual Contributors Won't Speak Up Anonymously if They Think Facilitator Can De-Anonymize",
+      "consequence": "Persona says 'hesitant to speak up about real problems due to lack of psychological safety.' Technical section says 'NEVER store authorship' but user story #14 admits 'even database administrators cannot reverse-engineer authorship.' Teams will assume: (1) facilitator is also admin, (2) therefore facilitator can see who wrote what, (3) therefore I'm not actually safe. Unless you put 'How anonymity works' explanation in 72pt font on every note submission, users won't trust it. Similar to how no one reads privacy policies—claiming anonymity ≠ users believing it.",
+      "severity": "high",
+      "likelihood": "medium",
+      "category": "failure_modes"
+    },
+    {
+      "id": "fm-009",
+      "prdSectionId": "technical_considerations",
+      "title": "Permanent Anonymity Prevents You From Moderating Harassment or Malicious Content",
+      "consequence": "Technical section acknowledges 'permanent anonymity creates forensic challenge if malicious content posted.' First time someone posts 'Sarah is incompetent and should be fired' in anonymous note, you have zero recourse. Can't delete it (undermines anonymity promise), can't identify author (permanent anonymity), can't ban user (don't know who). Legal risk is massive—if note contains harassment/discrimination, company is liable but tool prevented investigation. You've built an anonymous harassment platform with no moderation controls.",
+      "severity": "critical",
+      "likelihood": "medium",
+      "category": "failure_modes"
+    },
+    {
+      "id": "fm-010",
+      "prdSectionId": "success_metrics",
+      "title": "No Baseline Data Means You Can't Prove 40% → 80% Action Completion Improvement",
+      "consequence": "Success criteria targets '80%+ action completion from baseline 40-50%' but flags section admits 'no baseline data on current action item completion rates for target teams.' You'll launch, teams will hit 55% completion, and you can't prove if that's improvement or not. Even worse—if teams currently at 70% completion in Jira, Forge Pulse dropping them to 55% looks like regression. With no A/B testing and no baseline, all improvement claims are unfalsifiable.",
+      "severity": "medium",
+      "likelihood": "high",
+      "category": "failure_modes"
+    },
+    {
+      "id": "fm-011",
+      "prdSectionId": "scope",
+      "title": "Single Retrospective Format Means Staleness in 4-6 Sprints Per Finding-009",
+      "consequence": "Scope explicitly excludes 'multiple retrospective format templates (single simple format to start).' Finding-009 shows 'retrospectives grow stale with repetitive formats.' You're intentionally building in staleness. By sprint 6, teams are clicking through the same columns (What went well / What needs improvement) on autopilot. Competitors offer 80+ templates (TeamRetro) specifically to solve this. You're betting that Heartbeat Timeline freshness outweighs format fatigue—unvalidated assumption.",
+      "severity": "medium",
+      "likelihood": "high",
+      "category": "failure_modes"
+    },
+    {
+      "id": "fm-012",
+      "prdSectionId": "user_stories",
+      "title": "10-Second Note Submission Target is Impossible With Anonymity Verification UI",
+      "consequence": "User story #4 requires 'can submit note in <10 seconds from typing to confirmation' but story #14 requires 'clear confirmation that submission is anonymous.' These conflict. To build trust, you need: (1) explanation modal on first use (~15 seconds), (2) visual indicator during submission, (3) confirmation with anonymity reminder. That's 15-20 seconds minimum for first note, 8-12 seconds for subsequent. Miss the 10-second target = fail speed promise. Hit 10-second target = users don't trust anonymity.",
+      "severity": "medium",
+      "likelihood": "high",
+      "category": "failure_modes"
+    }
+  ],
+  "scalePain": [
+    {
+      "id": "sp-001",
+      "prdSectionId": "technical_considerations",
+      "title": "WebSocket Architecture Doesn't Scale Beyond 50 Concurrent Retros Without Rewrite",
+      "consequence": "Tech stack says 'Node.js + Socket.io' planning for '10 concurrent users per retro.' At 50 concurrent retros (10 teams × 5 teams each running retros), that's 500 WebSocket connections on single Node instance. Socket.io docs show single process maxes out at 1000-2000 connections before memory pressure. At 100 teams (your 12-month goal), you need to completely rewrite to multi-instance with Redis pub/sub for inter-process communication. That's 2-3 month rewrite project that wasn't budgeted, blocking all feature development.",
+      "severity": "high",
+      "likelihood": "medium",
+      "category": "scale_pain"
+    },
+    {
+      "id": "sp-002",
+      "prdSectionId": "scope",
+      "title": "Historical Timeline Queries Become Unusably Slow at 6+ Months of Data",
+      "consequence": "Heartbeat Timeline shows 'all past retrospectives in chronological order.' Success criteria targets 6+ month retention. At 26 retrospectives per team (biweekly for 12 months), with 6 participants averaging 5 notes each, that's 26 × 6 × 5 = 780 notes per team per year. At 100 teams, that's 78,000 notes. Querying PostgreSQL to aggregate sentiment, cluster themes, and render timeline will take 3-5 seconds without indexes, 1-2 seconds with. Users expect <500ms. Either you pre-compute expensive aggregations (different architecture) or timeline becomes unusably slow, making primary differentiator a liability.",
+      "severity": "high",
+      "likelihood": "high",
+      "category": "scale_pain"
+    },
+    {
+      "id": "sp-003",
+      "prdSectionId": "success_metrics",
+      "title": "Tracking 'Reduction in Recurring Themes' Requires NLP, Which Isn't In Scope",
+      "consequence": "Success metric says 'reduction in recurring themes (same issue appearing in 3+ consecutive retros)' but flags admit 'unclear how to quantify without natural language processing.' You're betting humans will manually tag themes consistently. They won't. 'Communication problems' vs 'Poor communication' vs 'Team coordination issues' are same theme, different words. Without NLP/clustering (specifically excluded from MVP), you can't measure your own success criteria. At scale with 100s of teams, manual theme tracking is impossible.",
+      "severity": "medium",
+      "likelihood": "high",
+      "category": "scale_pain"
+    },
+    {
+      "id": "sp-004",
+      "prdSectionId": "scope",
+      "title": "No Cross-Team Analytics Means Enterprise Expansion Requires Complete Product Rewrite",
+      "consequence": "Scope explicitly states 'fully isolated teams only, no cross-team analytics.' This works for 5-team startup but dies at scale. When single customer grows to 20 teams, their VP Engineering will demand: 'Show me action completion rates across all teams' and 'Which teams have declining morale trends?' You'll say 'not supported' and they'll switch to Echometer or TeamRetro. The data isolation architecture you're building for MVP requires complete rewrite to support aggregation. That's 3-4 months of work that makes all existing team-level code technical debt.",
+      "severity": "high",
+      "likelihood": "medium",
+      "category": "scale_pain"
+    },
+    {
+      "id": "sp-005",
+      "prdSectionId": "technical_considerations",
+      "title": "No Jira Integration Means Action Items Live in Silo, Creating Second-Class Status",
+      "consequence": "Finding-022 shows Jira/Linear integration is expected, but PRD says 'start fresh without integrations for MVP.' When team creates 3 retrospective actions in Forge Pulse but has 40 sprint tasks in Jira, the 3 retro actions are invisible to product planning. Teams will manually copy actions to Jira (double-entry) for 2-3 sprints, then stop using Forge Pulse action tracking entirely, using it only for the anonymous feedback part. You've made your own 'Action Pulse' feature irrelevant. At scale, 0% of teams will use action tracking without integration.",
+      "severity": "high",
+      "likelihood": "high",
+      "category": "scale_pain"
+    }
+  ],
+  "userConfusionRisks": [
+    {
+      "id": "uc-001",
+      "prdSectionId": "problem",
+      "title": "'Vital Signs Monitor' Metaphor Assumes Users Know What Medical Vital Signs Mean",
+      "consequence": "Problem statement calls it 'vital signs monitor' for team health. Engineers aged 24-35 (primary persona) have minimal hospital/medical experience. What does 'declining pulse' mean? Is 'flat line' good (stable) or bad (dead)? Medical metaphor works for executives who've seen hospital dashboards, fails for individual contributors. User testing will show 40-60% misinterpret visualizations. Either you explain metaphor with tutorial (adding friction), or users misread their own team health data.",
+      "severity": "medium",
+      "likelihood": "high",
+      "category": "user_confusion_risks"
+    },
+    {
+      "id": "uc-002",
+      "prdSectionId": "user_stories",
+      "title": "Actions Have Owners But Notes Are Anonymous—Users Won't Understand the Contradiction",
+      "consequence": "Notes are 'permanently anonymous, even from facilitator' but actions require 'specific owner and delivery date.' User submits anonymous note 'Our CI pipeline is broken,' team discusses, facilitator says 'Sarah will fix CI by Friday.' Sarah thinks: 'Everyone knows that was my note now' and feels exposed. The anonymity promise is retroactively broken by the action assignment process. Users will be confused about when they're protected and when they're accountable. This cognitive dissonance destroys psychological safety.",
+      "severity": "high",
+      "likelihood": "high",
+      "category": "user_confusion_risks"
+    },
+    {
+      "id": "uc-003",
+      "prdSectionId": "scope",
+      "title": "No Definition of What 'Auto-Carry Incomplete Actions' Means—Does Due Date Reset?",
+      "consequence": "Scope says 'auto-carry incomplete actions to next retrospective' but doesn't specify: Does the due sprint update automatically? Does it show as 'overdue'? Does owner get re-assigned or stay the same? If action was due 'Sprint 23' and now it's Sprint 25, does it show 'overdue by 2 sprints' or does due date update to 'Sprint 26'? Facilitators will have no idea how to interpret carried-over actions. Without clear rules, same action will get carried 4+ times, defeating the accountability purpose.",
+      "severity": "medium",
+      "likelihood": "high",
+      "category": "user_confusion_risks"
+    },
+    {
+      "id": "uc-004",
+      "prdSectionId": "user_stories",
+      "title": "Upvote Without Revealing Identity vs Cannot Vote Multiple Times Is Contradiction Users Will Notice",
+      "consequence": "Story #2 says 'upvote count increases without displaying voter identities' AND 'cannot vote multiple times on same note.' Users who understand tech will immediately ask: 'How does it know I already voted if it doesn't track who I am?' Either there's a cookie/token (which users will assume tracks them), or there's no duplicate prevention (which users will game). Trying to have both is technically contradictory and users will distrust the system.",
+      "severity": "medium",
+      "likelihood": "high",
+      "category": "user_confusion_risks"
+    },
+    {
+      "id": "uc-005",
+      "prdSectionId": "success_metrics",
+      "title": "Heartbeat Timeline Shows 'Sentiment Trend' But Scope Has No Sentiment Collection Mechanism",
+      "consequence": "Success metrics say 'team sentiment trends positive in Heartbeat Timeline' and user story #3 says 'visual indicators show sentiment trend (positive/neutral/negative).' But scope doesn't mention how sentiment is captured. Is it auto-derived from note text (requires NLP, out of scope)? Is it a manual emoji rating per retro (not in user stories)? Is it facilitator-assigned (undermines anonymity)? Users will see 'sentiment: neutral' on timeline and have no idea what it means or how it was calculated.",
+      "severity": "medium",
+      "likelihood": "medium",
+      "category": "user_confusion_risks"
+    },
+    {
+      "id": "uc-006",
+      "prdSectionId": "personas",
+      "title": "Facilitator Role is Undefined—Engineering Manager? Scrum Master? Rotating?",
+      "consequence": "Persona describes 'Scrum master, engineering manager, or team lead' but flags admit 'unknown whether teams have dedicated Scrum Masters or if engineering managers facilitate.' In startups, teams often rotate facilitator role or have no dedicated facilitator. If permissions are tied to 'facilitator role' but team rotates weekly, you're forcing team to do user admin overhead every sprint. If facilitator role is too powerful (can see who wrote what), rotating becomes dangerous. Unclear facilitator model creates onboarding friction and permission confusion.",
+      "severity": "medium",
+      "likelihood": "medium",
+      "category": "user_confusion_risks"
+    },
+    {
+      "id": "uc-007",
+      "prdSectionId": "scope",
+      "title": "What Does 'One-Click Conversion of Themes to Action Items' Mean With Multiple Notes Per Theme?",
+      "consequence": "Scope says 'one-click conversion of themes to action items' but themes are typically multiple upvoted notes grouped together. Does one-click create ONE action item summarizing the theme? Does it create one action per note in theme? Does facilitator edit the consolidated text? The phrase 'one-click' implies zero additional input, but creating a quality action item requires owner assignment, due date, and specific wording. This 'one-click' promise will either be broken (requires 5+ clicks) or result in garbage action items (no details).",
+      "severity": "low",
+      "likelihood": "high",
+      "category": "user_confusion_risks"
+    }
+  ],
+  "engineeringRegrets": [
+    {
+      "id": "er-001",
+      "prdSectionId": "technical_considerations",
+      "title": "PostgreSQL for Timeline Queries Will Require Full Migration to Time-Series DB in 12 Months",
+      "consequence": "Tech stack chooses PostgreSQL for 'good for action tracking and timeline queries.' But Heartbeat Timeline is time-series data (retrospectives over time) which Postgres handles poorly at scale. Time-series databases (TimescaleDB, InfluxDB) are optimized for 'all retros in date range' queries. At 1000 teams, timeline queries will run 10-50x slower on Postgres than specialized TSDB. You'll spend 2-3 months migrating data and rewriting queries, or accept 3-5 second timeline loads (killing UX). Should have chosen TimescaleDB (Postgres extension) from day 1 to avoid migration pain.",
+      "severity": "medium",
+      "likelihood": "medium",
+      "category": "engineering_regrets"
+    },
+    {
+      "id": "er-002",
+      "prdSectionId": "technical_considerations",
+      "title": "Session-Based Voting Tokens Break When User Refreshes Browser Mid-Retro",
+      "consequence": "Tech section says 'session-based voting tokens as best-effort solution' to prevent duplicate votes. When user's browser crashes or they refresh page 30 minutes into 90-minute retro, their session token resets. Now they can vote again on notes they already upvoted, OR their previous votes are orphaned and don't count. Either way, vote counts become unreliable. With 10 people per retro, 90-minute duration, expect 1-2 browser refreshes per retro. That's 10-20% of retros with corrupted vote data. Should have used IP + timestamp window or required lightweight login persistence.",
+      "severity": "medium",
+      "likelihood": "high",
+      "category": "engineering_regrets"
+    },
+    {
+      "id": "er-003",
+      "prdSectionId": "technical_considerations",
+      "title": "No Conflict Resolution Strategy Means WebSocket Race Conditions Will Corrupt Data",
+      "consequence": "Tech section asks 'do we need conflict resolution for simultaneous edits? Probably not for MVP - notes are append-only.' Wrong. Two users typing notes simultaneously, both hit enter within 50ms, both WebSocket messages arrive at server concurrently. Without distributed timestamp or vector clocks, server processes messages in arbitrary order. If notes are being upvoted while new notes are being added, note IDs can collide or ordering becomes non-deterministic. This is the exact problem Operational Transformation (OT) or CRDTs solve. By punting on conflict resolution, you're guaranteeing data corruption bugs that take weeks to debug.",
+      "severity": "high",
+      "likelihood": "medium",
+      "category": "engineering_regrets"
+    },
+    {
+      "id": "er-004",
+      "prdSectionId": "scope",
+      "title": "Not Building Integrations in MVP Means Architecting for Integrations Later is 3x Harder",
+      "consequence": "Scope excludes 'third-party integrations (Jira, Linear, Slack)' to ship faster. But integration points affect core data model. Jira needs issue IDs, Linear needs team IDs, Slack needs channel mappings. If you design action item schema without foreign key fields for external systems, adding integrations later requires migrating all existing action items to new schema with nullable fields. That's 2-4 weeks of migration work. Should have designed action item model with 'external_id' and 'external_system' fields from day 1, even if MVP doesn't use them. Adding integration-readiness to data model costs 1-2 days now, saves 2-4 weeks later.",
+      "severity": "medium",
+      "likelihood": "high",
+      "category": "engineering_regrets"
+    },
+    {
+      "id": "er-005",
+      "prdSectionId": "technical_considerations",
+      "title": "React Beautiful DND is Deprecated—Building On Dead Library Creates Maintenance Nightmare",
+      "consequence": "Tech stack references finding-012 citing 'Retrospected's use of React Beautiful DND.' As of 2023, React Beautiful DND is in maintenance mode with no new features. DnD Kit is the successor recommended by React community. Building new product on deprecated library means: (1) no bug fixes when issues arise, (2) incompatibility with future React versions, (3) migration to DnD Kit required in 6-12 months. That migration is 2-3 weeks of refactoring work. Should choose actively maintained libraries for core features.",
+      "severity": "medium",
+      "likelihood": "medium",
+      "category": "engineering_regrets"
+    },
+    {
+      "id": "er-006",
+      "prdSectionId": "technical_considerations",
+      "title": "Encryption At Rest Without Key Rotation Strategy Creates Compliance Nightmare",
+      "consequence": "Security section says 'encryption at rest for stored retro data' but doesn't specify key management strategy. GDPR requires ability to delete user data. If encryption keys are team-level (one key encrypts all one team's retros), and employee leaves company demanding data deletion, you can't decrypt just their data—you'd have to delete entire team's retro history. If keys are user-level, key management becomes impossibly complex for anonymous data. Without proper key hierarchy design, you'll fail GDPR compliance audits in 6-12 months and need emergency cryptography rewrite.",
+      "severity": "high",
+      "likelihood": "medium",
+      "category": "engineering_regrets"
+    },
+    {
+      "id": "er-007",
+      "prdSectionId": "scope",
+      "title": "No Versioning Strategy for Retrospective Data Means Breaking Changes Will Destroy Historical Timeline",
+      "consequence": "Scope emphasizes Heartbeat Timeline showing 6+ months of historical retros. What happens when you add new features (tags, sentiment, action priority levels) that existing retros don't have? If you migrate old data to new schema, you're manufacturing fake data (old retros never had sentiment). If you don't migrate, rendering timeline requires handling 5+ different schema versions, creating unmaintainable code. Without event sourcing or schema versioning from day 1, every feature addition requires deciding between data corruption (backfill fake values) or code complexity (handle N schema versions).",
+      "severity": "medium",
+      "likelihood": "high",
+      "category": "engineering_regrets"
+    },
+    {
+      "id": "er-008",
+      "prdSectionId": "technical_considerations",
+      "title": "WebSocket-Only Architecture Breaks Behind Corporate Firewalls That Block WS",
+      "consequence": "Tech stack relies on 'WebSocket technology required for live retro collaboration.' Many enterprise firewalls block WebSocket traffic or require special configuration. When your internal validation succeeds but first external pilot team is behind restrictive corporate firewall, WebSocket connections fail and app is unusable. Should have implemented HTTP long-polling or Server-Sent Events (SSE) as fallback from day 1. Socket.io provides fallback but requires explicit configuration. If not planned for, first enterprise customer will block deployment and require emergency architecture work.",
+      "severity": "medium",
+      "likelihood": "medium",
+      "category": "engineering_regrets"
+    }
+  ],
+  "marketSkeptic": {
+    "whyCare": {
+      "question": "Why would anyone care? Is the problem painful enough to pay for?",
+      "verdict": "moderate",
+      "detail": "The pain is real (40-50% action completion, recurring themes, psychological safety barriers) but the willingness to pay is questionable. Finding-002 shows GoRetro is completely free with unlimited users, Parabol free for 2 teams. The market has demonstrated that basic retrospective facilitation isn't worth paying for—free tools are 'good enough.' The differentiation (Heartbeat Timeline, permanent anonymity) hasn't been validated as worth $25-50/month when free alternatives exist. More importantly, the root problem (low action completion) is organizational culture, not tooling. Teams that don't complete 40% of actions won't complete 80% just because you make the tracking prettier. You're selling aspirin for symptoms, not antibiotics for the infection. Pain level: 7/10. Willingness to pay: 3/10."
+    },
+    "whyNow": {
+      "question": "Why now? What changed that makes this the right time?",
+      "verdict": "weak",
+      "detail": "The PRD provides no 'why now' argument. Retrospectives have been painful since Agile emerged 20+ years ago. Psychological safety issues aren't new (Google's Project Aristotle was 2015). The competitive landscape shows 10+ existing solutions (Parabol since 2016, Retrium since 2015, GoRetro, TeamRetro, etc.). The only 'now' trend is AI (finding-021 shows 80% of enterprises deploying GenAI), but Forge Pulse explicitly excludes AI from MVP. Remote work could be a 'why now' (COVID accelerated distributed teams), but scope explicitly targets live meetings only, ignoring 65% of distributed teams. There's no technological breakthrough, no regulatory change, no market shift that makes 2026 the right time. You're entering a mature, crowded market without a timing wedge."
+    },
+    "whyWin": {
+      "question": "Why would you win? What's the defensible advantage?",
+      "verdict": "weak",
+      "detail": "Differentiation is Heartbeat Timeline + permanent anonymity + auto-carry actions. None of these are defensible. GoRetro (ranked #1 on G2, completely free) can copy all three features in 8-12 weeks of development. Parabol is open-source, so community could add these features. You have: (1) no network effects (teams don't benefit from other teams using tool), (2) no data moat (each team's data is isolated), (3) no integration lock-in (explicitly no integrations in MVP), (4) no proprietary technology (WebSockets, React, PostgreSQL are commodity), (5) no brand (internal tool first). Your only advantage is 'we'll execute faster than established competitors'—but finding-005 shows TeamRetro praised for agility. You're competing on product features that are trivially copyable against competitors with 100x more resources and existing user bases. By the time you prove Heartbeat Timeline works, incumbents will have shipped it."
+    },
+    "featureVsProduct": {
+      "question": "Feature or product? Could a competitor add this in a sprint?",
+      "verdict": "weak",
+      "detail": "This is a feature bundle that any existing retro tool could add in 4-8 weeks. Heartbeat Timeline: 2-3 weeks for engineer to add chronological retro list with sentiment visualization. Permanent anonymity: 1-2 weeks to remove authorship fields from DB and add session-based voting. Auto-carry actions: 1 week to add 'incomplete' status and carry-forward logic. Total: 4-6 engineering weeks. TeamRetro (80+ templates, AI features, $15/month) could add this in one sprint. Parabol (open source, free for 2 teams) could accept community PR. The fact that you're building as internal tool first, not selling it, proves it's a feature—you're not confident it's a standalone product worth paying for. The 'product' is just a thin wrapper around facilitation features that competitors already have in different combinations."
+    }
+  },
+  "killRecommendation": {
+    "kill": false,
+    "rationale": "Don't kill this, but radically descope. The core insight is valid: retrospectives fail due to low psychological safety and poor action follow-through. But the execution plan is trying to solve too many problems at once. Here's what to save: Build ONLY the anonymous feedback collection + action tracking (no timeline, no historical views, no fancy visualizations). Make it a Slack bot or Linear integration, not standalone app. Let teams capture anonymous feedback in Slack during retro, then create Linear issues from top-voted items. This solves the two biggest pains (safety + tracking) without competing with free full-featured retro tools. It's a wedge product that fits into existing workflows rather than asking teams to switch tools. Timeline and 'vital signs' can come later if anonymous feedback + action tracking actually improves completion rates from 40% to 65%+. The current PRD is trying to build a $2M product to solve a $200K problem. Scale back to $200K solution first, prove it works with 20 teams in 6 months, THEN consider if full platform makes sense. The 1-2 month timeline is fantasy, the anonymity tech is half-baked, and the competitive moat is non-existent—but the customer pain is real enough to warrant a simpler MVP."
+  },
+  "overallAssessment": "This PRD exhibits three fatal flaws: (1) Solving symptom (low action completion) not cause (no organizational accountability culture), (2) Technical complexity (anonymous voting cryptography, WebSocket scaling, GDPR compliance) vastly underestimated relative to 1-2 month timeline, (3) Zero defensible moat against 10+ free competitors who can copy all features in 6-12 weeks. The problem space is real—finding-006/007/008 validate pain points—but the solution is over-engineered for a market with free alternatives. Most critical: The PRD assumes tooling can fix culture. It can't. Teams that complete 40% of actions have deeper dysfunction than tracking systems can solve. However, the anonymous feedback insight is valuable if narrowly applied. Recommendation: Pivot to integration/bot (Slack, Linear) rather than standalone app, focus solely on anonymous capture + action export, prove 40% → 65% improvement in 6 months with 20 teams, then reassess platform opportunity. Current plan will take 6 months, burn $150-200K in engineering time, and launch into commoditized market where GoRetro (free, #1 on G2) copies your differentiation in 8 weeks.",
+  "confidence": 0.88
+}
