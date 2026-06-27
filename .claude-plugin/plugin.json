@@ -1,0 +1,8 @@
+{
+  "name": "reckoning",
+  "version": "0.1.0",
+  "description": "Make AI attack your spec instead of flattering it. Isolated praise vs. critic, you commit your own take first, then a proceed/descope/kill verdict.",
+  "commands": ["./commands/reckon.md"],
+  "skills": ["./skills/reckoning"],
+  "agents": ["./agents/praise-engine.md", "./agents/critic-assassin.md"]
+}
