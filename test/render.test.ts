@@ -38,4 +38,11 @@ describe('renderVerdict', () => {
     const hasDoNotRegress = praise.strengths.some((s) => s.doNotRegress);
     if (hasDoNotRegress) expect(md).toContain('DO NOT REGRESS');
   });
+
+  it('renders non-obvious insights when the praise analysis has them', () => {
+    if (praise.nonObviousInsights.length > 0) {
+      expect(md).toContain('Non-obvious insights');
+      expect(md).toContain(praise.nonObviousInsights[0]!.title);
+    }
+  });
 });

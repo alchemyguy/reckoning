@@ -20,7 +20,7 @@ export const PRDDocumentSchema = z.object({
   version: z.string(),
   researchReportId: z.string(),
   sealedHash: z.string().optional(),
-  createdAt: z.string().datetime(),
+  createdAt: z.string().datetime({ offset: true }),
   sections: z.array(PRDSectionSchema),
   assumptionsExplicit: z.array(z.string()),
   contradictionsFlagged: z.array(z.string()),

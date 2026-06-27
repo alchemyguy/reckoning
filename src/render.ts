@@ -36,6 +36,16 @@ export function renderVerdict(critical: CriticalAnalysis, praise: PraiseAnalysis
   }
   lines.push('');
 
+  if (praise.nonObviousInsights.length > 0) {
+    lines.push('## 💡 Non-obvious insights');
+    for (const n of praise.nonObviousInsights) {
+      lines.push(`- **${n.title}** — §${n.prdSectionId}`);
+      lines.push(`  ${n.detail}`);
+      lines.push(`  _Why it's non-obvious:_ ${n.whyNonObvious}`);
+    }
+    lines.push('');
+  }
+
   lines.push('## 🔴 Failure modes (by severity)');
   const items = [...allItems(critical)].sort(
     (a, b) => SEVERITY_RANK[a.severity] - SEVERITY_RANK[b.severity],

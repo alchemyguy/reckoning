@@ -24,18 +24,18 @@ Dispatch BOTH of these as separate subagents **in parallel, in the same message*
 Neither subagent may see the other's output or the user's Step-1 answer.
 
 ## Step 3 — VALIDATE + RENDER (deterministic core)
-- Write each subagent's JSON to a temp file (e.g. `/tmp/reckoning-critical.json`, `/tmp/reckoning-praise.json`).
+- Write each subagent's JSON to a temp file (e.g. `/tmp/reckoning-<slug>-critical.json`, `/tmp/reckoning-<slug>-praise.json`).
 - Validate each:
-  `npx tsx <plugin>/src/cli.ts validate critical /tmp/reckoning-critical.json`
-  `npx tsx <plugin>/src/cli.ts validate praise /tmp/reckoning-praise.json`
+  `npx tsx ${CLAUDE_PLUGIN_ROOT}/src/cli.ts validate critical /tmp/reckoning-<slug>-critical.json`
+  `npx tsx ${CLAUDE_PLUGIN_ROOT}/src/cli.ts validate praise /tmp/reckoning-<slug>-praise.json`
   If either prints `INVALID`, show the errors, ask that subagent to fix its JSON, and re-validate. Do not proceed on invalid output.
 - Render the verdict:
-  `npx tsx <plugin>/src/cli.ts render /tmp/reckoning-critical.json /tmp/reckoning-praise.json`
+  `npx tsx ${CLAUDE_PLUGIN_ROOT}/src/cli.ts render /tmp/reckoning-<slug>-critical.json /tmp/reckoning-<slug>-praise.json`
 
 ## Step 4 — PRESENT
 - Show the rendered verdict markdown.
 - Then append a **cognitive-forcing diff**: compare the user's Step-1 answer to the AI's findings. Call out: what the user flagged that the AI confirmed, what the AI found that the user missed, and where they disagree. This is the payoff — keep it short and direct.
 
 Notes:
-- `<plugin>` is this plugin's install directory. Run `npm install` in it once if dependencies are missing.
+- `${CLAUDE_PLUGIN_ROOT}` is set by Claude Code to this plugin's install directory. Run `npm install` in it once if dependencies are missing.
 - Mode A (raw idea → questions → draft PRD → critique) and the research toggle are out of scope for this version; if the user gives an idea rather than a spec, ask them to provide a written spec for now.

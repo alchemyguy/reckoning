@@ -23,7 +23,7 @@ export const PraiseAnalysisSchema = z.object({
   id: z.string(),
   projectId: z.string(),
   prdVersion: z.string(),
-  createdAt: z.string().datetime(),
+  createdAt: z.string().datetime({ offset: true }),
   modelUsed: z.string(),
   strengths: z.array(PraiseItemSchema),
   nonObviousInsights: z.array(NonObviousInsightSchema),
