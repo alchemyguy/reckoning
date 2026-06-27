@@ -18,7 +18,7 @@ export const PRDDocumentSchema = z.object({
   id: z.string(),
   projectId: z.string(),
   version: z.string(),
-  researchReportId: z.string(),
+  researchReportId: z.string().optional(),
   sealedHash: z.string().optional(),
   createdAt: z.string().datetime({ offset: true }),
   sections: z.array(PRDSectionSchema),
