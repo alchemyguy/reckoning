@@ -1,8 +1,10 @@
 import { readFileSync } from 'node:fs';
 import { validateAgainst, type SchemaName } from './validate';
 import { renderVerdict } from './render';
+import { renderPRD } from './render-prd';
 import type { CriticalAnalysis } from './schemas/critical';
 import type { PraiseAnalysis } from './schemas/praise';
+import type { PRDDocument } from './schemas/prd';
 
 const SCHEMA_NAMES: readonly SchemaName[] = ['critical', 'praise', 'prd'];
 
@@ -35,6 +37,14 @@ export function run(argv: string[]): { code: number; out: string } {
     if (!praise.ok) return { code: 1, out: ['INVALID praise', ...praise.errors].join('\n') };
     const md = renderVerdict(critical.data as CriticalAnalysis, praise.data as PraiseAnalysis);
     return { code: 0, out: md };
+  }
+
+  if (cmd === 'render-prd') {
+    const [prdPath] = rest;
+    if (!prdPath) return { code: 1, out: 'usage: render-prd <prdPath>' };
+    const prd = validateAgainst('prd', readJson(prdPath));
+    if (!prd.ok) return { code: 1, out: ['INVALID prd', ...prd.errors].join('\n') };
+    return { code: 0, out: renderPRD(prd.data as PRDDocument) };
   }
 
   return { code: 1, out: `unknown command: ${cmd ?? '(none)'} (expected: validate | render)` };
