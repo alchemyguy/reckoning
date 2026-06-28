@@ -27,7 +27,7 @@ OUTPUT FORMAT: Output ONLY a single JSON object matching the PRDDocument schema 
   "id": "prd-001",
   "projectId": "<slug>",
   "version": "v1",
-  "createdAt": "<ISO 8601 datetime>",
+  "createdAt": "<ISO 8601 datetime with offset, e.g. 2026-06-28T12:00:00Z>",
   "sections": [
     { "id": "problem", "title": "Problem", "content": "...", "citations": [], "confidence": 0.0, "flags": ["..."] }
   ],

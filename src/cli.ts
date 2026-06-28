@@ -47,7 +47,7 @@ export function run(argv: string[]): { code: number; out: string } {
     return { code: 0, out: renderPRD(prd.data as PRDDocument) };
   }
 
-  return { code: 1, out: `unknown command: ${cmd ?? '(none)'} (expected: validate | render)` };
+  return { code: 1, out: `unknown command: ${cmd ?? '(none)'} (expected: validate | render | render-prd)` };
 }
 
 // Entry point when invoked directly (npx tsx src/cli.ts ...)

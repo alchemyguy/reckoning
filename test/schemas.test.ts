@@ -50,3 +50,17 @@ describe('PRDDocumentSchema — no research report (Mode A)', () => {
     expect(result.success).toBe(true);
   });
 });
+
+describe('idea-prd fixture — research-free Mode A draft', () => {
+  it('validates as a PRD with no researchReportId and only empty citations', () => {
+    const result = PRDDocumentSchema.safeParse(fixture('idea-prd.json'));
+    if (!result.success) console.error(result.error.issues);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.researchReportId).toBeUndefined();
+      for (const section of result.data.sections) {
+        expect(section.citations.length).toBe(0);
+      }
+    }
+  });
+});
