@@ -33,3 +33,34 @@ describe('PRDDocumentSchema', () => {
     expect(result.success).toBe(true);
   });
 });
+
+describe('PRDDocumentSchema — no research report (Mode A)', () => {
+  it('accepts a PRD with no researchReportId', () => {
+    const prd = {
+      id: 'prd-001',
+      projectId: 'my-idea',
+      version: 'v1',
+      createdAt: '2026-06-27T00:00:00Z',
+      sections: [],
+      assumptionsExplicit: [],
+      contradictionsFlagged: [],
+    };
+    const result = PRDDocumentSchema.safeParse(prd);
+    if (!result.success) console.error(result.error.issues);
+    expect(result.success).toBe(true);
+  });
+});
+
+describe('idea-prd fixture — research-free Mode A draft', () => {
+  it('validates as a PRD with no researchReportId and only empty citations', () => {
+    const result = PRDDocumentSchema.safeParse(fixture('idea-prd.json'));
+    if (!result.success) console.error(result.error.issues);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.researchReportId).toBeUndefined();
+      for (const section of result.data.sections) {
+        expect(section.citations.length).toBe(0);
+      }
+    }
+  });
+});

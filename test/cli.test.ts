@@ -24,4 +24,16 @@ describe('cli run()', () => {
     expect(code).toBe(0);
     expect(out).toContain('Reckoning Verdict');
   });
+
+  it('render-prd prints the draft PRD markdown (exit 0)', () => {
+    const { code, out } = run(['render-prd', ex('prd-v1.json')]);
+    expect(code).toBe(0);
+    expect(out).toContain('Draft PRD');
+  });
+
+  it('render-prd with no path prints usage (exit 1)', () => {
+    const { code, out } = run(['render-prd']);
+    expect(code).toBe(1);
+    expect(out).toContain('usage');
+  });
 });

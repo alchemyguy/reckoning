@@ -1,0 +1,72 @@
+{
+  "id": "prd-001",
+  "projectId": "forge-pulse-fast-feedback-team-heartbeat",
+  "version": "v1",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "sections": [
+    {
+      "id": "problem",
+      "title": "Problem",
+      "content": "Engineering teams run retrospectives but **most action items die** before the next sprint. The founder believes the root causes are (1) low psychological safety, so real issues go unspoken, and (2) no durable follow-through on the actions that do get raised.\n\n- Pain is felt most by **individual contributors** who don't feel safe raising problems.\n- Existing retro tools focus on the meeting, not on what happens after.",
+      "citations": [],
+      "confidence": 0.55,
+      "flags": ["ASSUMPTION: root-cause claims come from the founder's intuition, not validated user research."]
+    },
+    {
+      "id": "personas",
+      "title": "User Personas",
+      "content": "- **IC engineer (primary):** wants to raise real concerns without fear of attribution.\n- **Team lead / facilitator:** runs the retro and is accountable for follow-through.",
+      "citations": [],
+      "confidence": 0.5,
+      "flags": ["ASSUMPTION: persona pain points are inferred from the interview, not from interviews with real target users."]
+    },
+    {
+      "id": "scope",
+      "title": "Scope & Non-Goals",
+      "content": "**In scope (MVP):** anonymous feedback capture, simple upvoting, action items with owners.\n\n**Non-goals:** multiple retro formats, cross-team analytics, third-party integrations.",
+      "citations": [],
+      "confidence": 0.6,
+      "flags": ["ASSUMPTION: credible anonymity can be delivered in the MVP — not yet validated technically."]
+    },
+    {
+      "id": "success_metrics",
+      "title": "Success Metrics",
+      "content": "- **Action completion rate** rises from an assumed baseline of ~40-50% to **70%+** within 3 months of adoption.\n- **Participation:** a majority of team members submit at least one note per retro.",
+      "citations": [],
+      "confidence": 0.4,
+      "flags": ["VAGUE_METRIC: baseline completion rate is assumed, not measured.", "UNKNOWN: no instrumentation plan for measuring completion."]
+    },
+    {
+      "id": "user_stories",
+      "title": "User Stories",
+      "content": "1. As an IC, I can submit a retro note **anonymously** so I can be honest.\n2. As a team, we can **upvote** notes so the most important themes rise.\n3. As a facilitator, I can turn a theme into an **action item with an owner and due date**.",
+      "citations": [],
+      "confidence": 0.65,
+      "flags": []
+    },
+    {
+      "id": "technical_considerations",
+      "title": "Technical Considerations",
+      "content": "- Real-time collaboration during the retro implies **WebSockets**.\n- **Anonymity** is the hard part: the data model must not store authorship in a way a facilitator or admin could reverse.\n- Duplicate-vote prevention without identity is an open problem.",
+      "citations": [],
+      "confidence": 0.45,
+      "flags": ["ASSUMPTION: WebSockets are required — not yet validated against actual usage patterns.", "UNKNOWN: anonymous duplicate-vote prevention approach is undecided."]
+    },
+    {
+      "id": "risks_and_open_questions",
+      "title": "Risks & Open Questions",
+      "content": "- The product may be **solving a culture problem with tooling** — tracking actions more visibly may not make teams complete them.\n- Free, established retro tools may be \"good enough,\" making willingness-to-pay unclear.\n- Open question: who is the buyer, and is this a standalone product or a feature?",
+      "citations": [],
+      "confidence": 0.5,
+      "flags": ["RISK: tooling may not fix an organizational/culture problem.", "UNKNOWN: willingness to pay and the buyer are undetermined."]
+    }
+  ],
+  "assumptionsExplicit": [
+    "The core problem is low psychological safety plus poor follow-through (founder's hypothesis, unvalidated).",
+    "Teams will trust an anonymity guarantee enough to speak freely.",
+    "A standalone tool is worth adopting over existing free retro tools."
+  ],
+  "contradictionsFlagged": [
+    "Notes are meant to be permanently anonymous, yet action items have named owners — an owner may be inferable from the note that spawned the action."
+  ]
+}
