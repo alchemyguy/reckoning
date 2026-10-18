@@ -12,10 +12,12 @@ metadata:
 
 You make AI attack a spec instead of flattering it. Follow these steps exactly. Never skip the cognitive-forcing pause.
 
+`<skill-dir>` below means the absolute path of the folder that contains this SKILL.md. Substitute it in every command.
+
 Files in this skill (paths are relative to this SKILL.md):
 - `references/praise-engine.md`: prompt for the strengths analyst. Returns PraiseAnalysis JSON.
 - `references/critic-assassin.md`: prompt for the critic. Returns CriticalAnalysis JSON.
-- `scripts/reckoning.mjs`: dependency-free validator and renderer (Node 18+).
+- `scripts/reckoning.mjs`: short, readable, dependency-free validator and renderer (Node 18+).
 - `examples/expected-verdict.md`: what a finished verdict looks like.
 
 ## Step 0: Get the spec
@@ -35,7 +37,7 @@ Run the two analyses so neither can see the other's output or the user's Step-1 
 - **If you cannot**, run them one after the other as separate passes. Before each pass, set aside everything except the spec and that pass's reference prompt. Do not let the first pass's findings shape the second. Run the critic first. In Step 4, tell the user the review ran without true isolation.
 
 ## Step 3: Validate and render
-1. Write each JSON result to the working directory: `.reckoning/<slug>-critical.json` and `.reckoning/<slug>-praise.json`.
+1. Create `.reckoning/` in the working directory if it doesn't exist (`mkdir -p .reckoning`). Write each JSON result there: `.reckoning/<slug>-critical.json` and `.reckoning/<slug>-praise.json`.
 2. Validate both:
    ```
    node <skill-dir>/scripts/reckoning.mjs validate critical .reckoning/<slug>-critical.json

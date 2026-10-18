@@ -12,14 +12,16 @@ metadata:
 
 You make AI attack a spec instead of flattering it. Follow these steps exactly. Never skip the cognitive-forcing pause.
 
+`<skill-dir>` below means the absolute path of the folder that contains this SKILL.md. Substitute it in every command.
+
 Files in this skill (paths are relative to this SKILL.md):
 - `references/synthesizer.md`: prompt for the PRD writer (Mode A). Returns PRDDocument JSON.
 - `references/praise-engine.md`: prompt for the strengths analyst. Returns PraiseAnalysis JSON.
 - `references/critic-assassin.md`: prompt for the critic. Returns CriticalAnalysis JSON.
-- `scripts/reckoning.mjs`: dependency-free validator and renderer (Node 18+).
+- `scripts/reckoning.mjs`: short, readable, dependency-free validator and renderer (Node 18+).
 - `examples/expected-prd.md` and `examples/expected-verdict.md`: what finished output looks like.
 
-Write every intermediate file to `.reckoning/` in the working directory. Use a short slug (lowercase, hyphens) derived from the idea or spec title.
+Write every intermediate file to `.reckoning/` in the working directory, and create that folder first if it doesn't exist (`mkdir -p .reckoning`). Use a short slug (lowercase, hyphens) derived from the idea or spec title.
 
 ## Step 0: Choose the mode
 Ask the user: **"Is this a raw idea, or an existing spec/PRD?"**

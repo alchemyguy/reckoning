@@ -15,35 +15,39 @@ const STRENGTH_RANK: Record<PraiseAnalysis['strengths'][number]['strengthLevel']
   solid: 2,
 };
 
-export function renderVerdict(critical: CriticalAnalysis, praise: PraiseAnalysis): string {
+// Without `praise` this renders a critic-only pre-mortem (no strengths sections).
+export function renderVerdict(critical: CriticalAnalysis, praise?: PraiseAnalysis): string {
   const { verdict, reason } = deriveVerdict(critical);
   const lines: string[] = [];
 
-  lines.push(`# Reckoning Verdict — ${critical.projectId} (${critical.prdVersion})`);
+  const heading = praise ? 'Reckoning Verdict' : 'Reckoning Pre-mortem';
+  lines.push(`# ${heading} — ${critical.projectId} (${critical.prdVersion})`);
   lines.push('');
   lines.push(`## ⚖️ Verdict: ${verdict}`);
   lines.push(reason);
   lines.push('');
 
-  lines.push('## ✅ Strengths');
-  const strengths = [...praise.strengths].sort(
-    (a, b) => STRENGTH_RANK[a.strengthLevel] - STRENGTH_RANK[b.strengthLevel],
-  );
-  for (const s of strengths) {
-    const badge = s.doNotRegress ? ' · 🔒 DO NOT REGRESS' : '';
-    lines.push(`- **${s.title}** [${s.strengthLevel}]${badge} — §${s.prdSectionId}`);
-    lines.push(`  ${s.whyItWorks}`);
-  }
-  lines.push('');
-
-  if (praise.nonObviousInsights.length > 0) {
-    lines.push('## 💡 Non-obvious insights');
-    for (const n of praise.nonObviousInsights) {
-      lines.push(`- **${n.title}** — §${n.prdSectionId}`);
-      lines.push(`  ${n.detail}`);
-      lines.push(`  _Why it's non-obvious:_ ${n.whyNonObvious}`);
+  if (praise) {
+    lines.push('## ✅ Strengths');
+    const strengths = [...praise.strengths].sort(
+      (a, b) => STRENGTH_RANK[a.strengthLevel] - STRENGTH_RANK[b.strengthLevel],
+    );
+    for (const s of strengths) {
+      const badge = s.doNotRegress ? ' · 🔒 DO NOT REGRESS' : '';
+      lines.push(`- **${s.title}** [${s.strengthLevel}]${badge} — §${s.prdSectionId}`);
+      lines.push(`  ${s.whyItWorks}`);
     }
     lines.push('');
+
+    if (praise.nonObviousInsights.length > 0) {
+      lines.push('## 💡 Non-obvious insights');
+      for (const n of praise.nonObviousInsights) {
+        lines.push(`- **${n.title}** — §${n.prdSectionId}`);
+        lines.push(`  ${n.detail}`);
+        lines.push(`  _Why it's non-obvious:_ ${n.whyNonObvious}`);
+      }
+      lines.push('');
+    }
   }
 
   lines.push('## 🔴 Failure modes (by severity)');
@@ -68,7 +72,9 @@ export function renderVerdict(critical: CriticalAnalysis, praise: PraiseAnalysis
   lines.push(critical.overallAssessment);
   lines.push('');
   lines.push(
-    `_Critic confidence: ${critical.confidence} · Praise confidence: ${praise.confidence}_`,
+    praise
+      ? `_Critic confidence: ${critical.confidence} · Praise confidence: ${praise.confidence}_`
+      : `_Critic confidence: ${critical.confidence}_`,
   );
 
   return lines.join('\n');

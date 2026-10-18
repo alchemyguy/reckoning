@@ -46,3 +46,19 @@ describe('renderVerdict', () => {
     }
   });
 });
+
+describe('renderVerdict without praise (pre-mortem)', () => {
+  const md = renderVerdict(fixture<CriticalAnalysis>('critical-v1.json'));
+
+  it('renders a pre-mortem heading and verdict but no strengths', () => {
+    expect(md).toContain('Reckoning Pre-mortem');
+    expect(md).toMatch(/Verdict: (PROCEED|DESCOPE|KILL)/);
+    expect(md).not.toContain('Strengths');
+    expect(md).not.toContain('Praise confidence');
+  });
+
+  it('still renders failure modes and the market skeptic', () => {
+    expect(md).toContain('Failure modes');
+    expect(md).toContain('Market skeptic');
+  });
+});

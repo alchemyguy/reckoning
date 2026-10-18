@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 import { execFileSync } from 'node:child_process';
-import { cpSync, mkdtempSync, readdirSync, readFileSync } from 'node:fs';
+import { cpSync, mkdtempSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -26,16 +26,29 @@ describe('portable skills', () => {
 
   it('committed portable/skills is up to date (run `npm run build:skills`)', () => {
     expect(listFiles(COMMITTED).sort()).toEqual(listFiles(fresh).sort());
+    // Normalize line endings so a Windows checkout with autocrlf doesn't fail spuriously.
+    const read = (p: string) => readFileSync(p, 'utf8').replace(/\r\n/g, '\n');
     for (const f of listFiles(fresh)) {
-      expect(readFileSync(join(COMMITTED, f), 'utf8'), f).toBe(readFileSync(join(fresh, f), 'utf8'));
+      expect(read(join(COMMITTED, f)), f).toBe(read(join(fresh, f)));
     }
   });
 
   it.each(names)('%s has frontmatter whose name matches its folder', (name) => {
-    const md = readFileSync(join(COMMITTED, name, 'SKILL.md'), 'utf8');
+    const md = readFileSync(join(COMMITTED, name, 'SKILL.md'), 'utf8').replace(/\r\n/g, '\n');
     expect(md).toMatch(new RegExp(`^---\\nname: ${name}\\ndescription: .{50,1024}\\n`));
+    expect(md).toContain('`<skill-dir>` below means');
     expect(md).not.toContain('CLAUDE_PLUGIN_ROOT');
     expect(md).not.toContain('AskUserQuestion');
+  });
+
+  it.each(names)('%s script is short, readable and executable (security-scan friendly)', (name) => {
+    const script = join(COMMITTED, name, 'scripts/reckoning.mjs');
+    const src = readFileSync(script, 'utf8');
+    expect(src.startsWith('#!/usr/bin/env node\n')).toBe(true);
+    expect(src.length).toBeLessThan(40_000);
+    expect(src).not.toContain('ZodError');
+    expect(Math.max(...src.split('\n').map((l) => l.length))).toBeLessThan(200);
+    if (process.platform !== 'win32') expect(statSync(script).mode & 0o111).not.toBe(0);
   });
 
   it.each(names)('%s bundled script runs with no node_modules', (name) => {
@@ -49,6 +62,10 @@ describe('portable skills', () => {
     expect(run('render', join(EXAMPLES, 'critical-v1.json'), join(EXAMPLES, 'praise-v1.json'))).toContain(
       'Reckoning Verdict',
     );
+    expect(run('render-critical', join(EXAMPLES, 'critical-v1.json'))).toContain('Reckoning Pre-mortem');
     expect(run('render-prd', join(EXAMPLES, 'idea-prd.json'))).toContain('Draft PRD');
+    expect(() => run('validate', 'prd', join(EXAMPLES, 'critical-v1.json'))).toThrow(
+      expect.objectContaining({ status: 1, stdout: expect.stringContaining('INVALID') }),
+    );
   });
 });

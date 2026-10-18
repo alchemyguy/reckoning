@@ -12,9 +12,11 @@ metadata:
 
 You turn a raw idea into an honest draft PRD. Follow these steps exactly.
 
+`<skill-dir>` below means the absolute path of the folder that contains this SKILL.md. Substitute it in every command.
+
 Files in this skill (paths are relative to this SKILL.md):
 - `references/synthesizer.md`: prompt for the PRD writer. Returns PRDDocument JSON.
-- `scripts/reckoning.mjs`: dependency-free validator and renderer (Node 18+).
+- `scripts/reckoning.mjs`: short, readable, dependency-free validator and renderer (Node 18+).
 - `examples/expected-prd.md`: what a finished draft looks like.
 
 ## Step 1: Clarifying interview (up to 3 rounds)
@@ -25,7 +27,7 @@ Use a structured question tool if you have one. Otherwise ask in plain chat and 
 ## Step 2: Draft the PRD
 Follow `references/synthesizer.md` and give it only the idea and the full Q&A transcript. If you can start a subagent or isolated task, run the drafting there. Otherwise follow the prompt directly. The output is a PRDDocument JSON built only from the user's answers: empty citations, assumptions flagged.
 
-Derive a short slug (lowercase, hyphens) from the idea and write the JSON to `.reckoning/<slug>-prd.json`.
+Derive a short slug (lowercase, hyphens) from the idea, create `.reckoning/` in the working directory if it doesn't exist (`mkdir -p .reckoning`), and write the JSON to `.reckoning/<slug>-prd.json`.
 
 ## Step 3: Validate and render
 ```

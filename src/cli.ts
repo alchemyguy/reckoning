@@ -41,6 +41,14 @@ export function run(argv: string[]): { code: number; out: string } {
     return { code: 0, out: md };
   }
 
+  if (cmd === 'render-critical') {
+    const [criticalPath] = rest;
+    if (!criticalPath) return { code: 1, out: 'usage: render-critical <criticalPath>' };
+    const critical = validateAgainst('critical', readJson(criticalPath));
+    if (!critical.ok) return { code: 1, out: ['INVALID critical', ...critical.errors].join('\n') };
+    return { code: 0, out: renderVerdict(critical.data as CriticalAnalysis) };
+  }
+
   if (cmd === 'render-prd') {
     const [prdPath] = rest;
     if (!prdPath) return { code: 1, out: 'usage: render-prd <prdPath>' };
@@ -49,7 +57,7 @@ export function run(argv: string[]): { code: number; out: string } {
     return { code: 0, out: renderPRD(prd.data as PRDDocument) };
   }
 
-  return { code: 1, out: `unknown command: ${cmd ?? '(none)'} (expected: validate | render | render-prd)` };
+  return { code: 1, out: `unknown command: ${cmd ?? '(none)'} (expected: validate | render | render-critical | render-prd)` };
 }
 
 // Entry point when invoked directly (npx tsx src/cli.ts ..., or the bundled

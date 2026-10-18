@@ -33,17 +33,18 @@ Both paths end in the same isolated praise-vs-critic review, the cognitive-forci
 
 ## Portable skills (Cursor, Copilot, Codex and other agents)
 
-The same flow ships as three self-contained skills in the open `SKILL.md` format, in [`portable/skills/`](portable/skills):
+The same flow ships as four self-contained skills in the open `SKILL.md` format, in [`portable/skills/`](portable/skills):
 
 | Skill | What it does |
 |---|---|
 | [`reckon`](portable/skills/reckon) | Full flow: raw idea or spec → isolated praise vs. critic → proceed/descope/kill verdict |
 | [`spec-red-team`](portable/skills/spec-red-team) | Red-team an existing spec/PRD (Mode B only) |
 | [`idea-to-prd`](portable/skills/idea-to-prd) | Interview → honest draft PRD with flagged assumptions (Mode A only) |
+| [`spec-premortem`](portable/skills/spec-premortem) | Critic only: severity-ranked failure modes + market-skeptic check |
 
-Each folder is self-contained: copy it into your agent's skills directory. The validator and renderer are bundled into one dependency-free `scripts/reckoning.mjs` (Node 18+, no `npm install`). On agents without subagents, the review runs as separate sequential passes and says so in the output.
+Each folder is self-contained: copy it into your agent's skills directory. The validator and renderer are bundled into one short, readable, dependency-free `scripts/reckoning.mjs` (Node 18+, no `npm install`). On agents without subagents, the review runs as separate sequential passes and says so in the output.
 
-These folders are generated. Edit `portable/src/<skill>/SKILL.md`, `agents/*.md` or `src/`, then run `npm run build:skills`. A test fails if the committed output is stale.
+These folders are generated. Edit `portable/src/<skill>/SKILL.md`, `agents/*.md` or `src/`, then run `npm run build:skills`. A test fails if the committed output is stale. `npm run pack:skills` also writes upload-ready zips to `portable/dist/`. Marketplace listing copy is in [`portable/LISTINGS.md`](portable/LISTINGS.md).
 
 ## Why it's different
 
