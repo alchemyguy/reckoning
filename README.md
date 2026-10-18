@@ -26,10 +26,25 @@ You'll be asked for your own take first. Then Reckoning dispatches two isolated 
 
 `/reckon` first asks whether your input is a **raw idea** or an **existing spec**:
 
-- **Raw idea** → Reckoning runs a short clarifying interview, drafts a PRD from your answers (flagging every assumption — no web research yet), shows you the draft, then red-teams it.
+- **Raw idea** → Reckoning runs a short clarifying interview, drafts a PRD from your answers (flagging every assumption — no web research yet), then red-teams it. You see the draft alongside the verdict, after you've given your own take.
 - **Existing spec** → it red-teams the spec you provide directly.
 
 Both paths end in the same isolated praise-vs-critic review, the cognitive-forcing pause, and a proceed/descope/kill verdict. See [`examples/forge-pulse/expected-prd.md`](examples/forge-pulse/expected-prd.md) for a Mode A draft PRD (drafted from the interview only — note the empty citations and flagged assumptions) and [`examples/forge-pulse/expected-verdict.md`](examples/forge-pulse/expected-verdict.md) for the verdict.
+
+## Portable skills (Cursor, Copilot, Codex and other agents)
+
+The same flow ships as four self-contained skills in the open `SKILL.md` format, in [`portable/skills/`](portable/skills):
+
+| Skill | What it does |
+|---|---|
+| [`reckon`](portable/skills/reckon) | Full flow: raw idea or spec → isolated praise vs. critic → proceed/descope/kill verdict |
+| [`spec-red-team`](portable/skills/spec-red-team) | Red-team an existing spec/PRD (Mode B only) |
+| [`idea-to-prd`](portable/skills/idea-to-prd) | Interview → honest draft PRD with flagged assumptions (Mode A only) |
+| [`spec-premortem`](portable/skills/spec-premortem) | Critic only: severity-ranked failure modes + market-skeptic check |
+
+Each folder is self-contained: copy it into your agent's skills directory. The validator and renderer are bundled into one short, readable, dependency-free `scripts/reckoning.mjs` (Node 18+, no `npm install`). On agents without subagents, the review runs as separate sequential passes and says so in the output.
+
+These folders are generated. Edit `portable/src/<skill>/SKILL.md`, `agents/*.md` or `src/`, then run `npm run build:skills`. A test fails if the committed output is stale. `npm run pack:skills` also writes upload-ready zips to `portable/dist/`. Marketplace listing copy is in [`portable/LISTINGS.md`](portable/LISTINGS.md).
 
 ## Why it's different
 

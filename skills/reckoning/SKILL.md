@@ -20,14 +20,13 @@ Ask the user (AskUserQuestion): **"Is this a raw idea, or an existing spec/PRD?"
 Interview the user with AskUserQuestion to understand the idea before drafting. Ask **4–8 questions per round**, covering: target users, the core problem & how painful it is, competitive landscape, business model, scope/timeline, technical constraints, success criteria, and what makes it different. Start broad; use each round's answers to ask sharper follow-ups. Stop once you genuinely have enough to draft (or after **3 rounds**). Keep the full Q&A transcript.
 
 ### A2. Synthesize a draft PRD
-Dispatch the `synthesizer` subagent with the idea + the full Q&A transcript. It returns a `PRDDocument` JSON drafted from the idea and answers ONLY — no research, empty citations, assumptions flagged. Write it to a temp file, e.g. `/tmp/reckoning-<slug>-prd.json`, and validate it:
-`npx tsx ${CLAUDE_PLUGIN_ROOT}/src/cli.ts validate prd /tmp/reckoning-<slug>-prd.json`
+Dispatch the `synthesizer` subagent with the idea + the full Q&A transcript. It returns a `PRDDocument` JSON drafted from the idea and answers ONLY — no research, empty citations, assumptions flagged. Write it to a file in the working directory, e.g. `.reckoning/<slug>-prd.json`, and validate it:
+`npx tsx ${CLAUDE_PLUGIN_ROOT}/src/cli.ts validate prd .reckoning/<slug>-prd.json`
 If it prints `INVALID`, show the errors, ask the synthesizer to fix its JSON, and re-validate. Do not proceed on invalid output.
 
-### A3. Show the draft
-Render and show the draft so the user sees exactly what will be critiqued:
-`npx tsx ${CLAUDE_PLUGIN_ROOT}/src/cli.ts render-prd /tmp/reckoning-<slug>-prd.json`
-The "spec" for the critique core (below) is this drafted PRD.
+### A3. Hold the draft until the verdict
+Don't show the draft yet: its flagged risks are AI analysis and would anchor the user's answer in the cognitive-forcing pause. The "spec" for the critique core (below) is this drafted PRD JSON; reviewers cite its section ids. In Step 1, ask about their idea instead of "this spec". In Step 4, show the rendered draft first:
+`npx tsx ${CLAUDE_PLUGIN_ROOT}/src/cli.ts render-prd .reckoning/<slug>-prd.json`
 
 → Continue to the **Critique core**.
 
@@ -57,19 +56,20 @@ Capture their answer verbatim. **Do not generate or reveal any AI analysis yet.*
 Dispatch BOTH of these as separate subagents **in parallel, in the same message**, each with ONLY the spec text (the loaded spec in Mode B, or the drafted PRD in Mode A) as context:
 - `praise-engine` → returns PraiseAnalysis JSON.
 - `critic-assassin` → returns CriticalAnalysis JSON.
-Neither subagent may see the other's output or the user's Step-1 answer.
+Neither subagent may see the other's output or the user's Step-1 answer. Also give each `projectId` = the slug, `createdAt` = the current UTC time (`date -u +%Y-%m-%dT%H:%M:%SZ`) and `modelUsed` = your model name.
 
 ### Step 3 — VALIDATE + RENDER
-- Write each subagent's JSON to a temp file (e.g. `/tmp/reckoning-<slug>-critical.json`, `/tmp/reckoning-<slug>-praise.json`).
+- Write each subagent's JSON to a file in the working directory (e.g. `.reckoning/<slug>-critical.json`, `.reckoning/<slug>-praise.json`).
 - Validate each:
-  `npx tsx ${CLAUDE_PLUGIN_ROOT}/src/cli.ts validate critical /tmp/reckoning-<slug>-critical.json`
-  `npx tsx ${CLAUDE_PLUGIN_ROOT}/src/cli.ts validate praise /tmp/reckoning-<slug>-praise.json`
+  `npx tsx ${CLAUDE_PLUGIN_ROOT}/src/cli.ts validate critical .reckoning/<slug>-critical.json`
+  `npx tsx ${CLAUDE_PLUGIN_ROOT}/src/cli.ts validate praise .reckoning/<slug>-praise.json`
   If either prints `INVALID`, show the errors, ask that subagent to fix its JSON, and re-validate. Do not proceed on invalid output.
 - Render the verdict:
-  `npx tsx ${CLAUDE_PLUGIN_ROOT}/src/cli.ts render /tmp/reckoning-<slug>-critical.json /tmp/reckoning-<slug>-praise.json`
+  `npx tsx ${CLAUDE_PLUGIN_ROOT}/src/cli.ts render .reckoning/<slug>-critical.json .reckoning/<slug>-praise.json`
 
 ### Step 4 — PRESENT
-- Show the rendered verdict markdown.
+- In Mode A, show the rendered draft PRD first (see A3).
+- Show the rendered verdict markdown as printed.
 - Then append a **cognitive-forcing diff**: compare the user's Step-1 answer to the AI's findings — what they flagged that the AI confirmed, what the AI found that they missed, and where they disagree. Keep it short and direct.
 
 Notes:

@@ -25,6 +25,18 @@ describe('cli run()', () => {
     expect(out).toContain('Reckoning Verdict');
   });
 
+  it('render-critical prints a critic-only pre-mortem (exit 0)', () => {
+    const { code, out } = run(['render-critical', ex('critical-v1.json')]);
+    expect(code).toBe(0);
+    expect(out).toContain('Reckoning Pre-mortem');
+  });
+
+  it('render-critical with no path prints usage (exit 1)', () => {
+    const { code, out } = run(['render-critical']);
+    expect(code).toBe(1);
+    expect(out).toContain('usage');
+  });
+
   it('render-prd prints the draft PRD markdown (exit 0)', () => {
     const { code, out } = run(['render-prd', ex('prd-v1.json')]);
     expect(code).toBe(0);

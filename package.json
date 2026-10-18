@@ -1,24 +1,31 @@
 {
   "name": "reckoning",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "description": "Make AI attack your spec instead of flattering it.",
-  "bin": { "reckoning": "src/cli.ts" },
+  "bin": {
+    "reckoning": "src/cli.ts"
+  },
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
     "reckon": "tsx src/cli.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "build:skills": "node scripts/build-skills.mjs",
+    "pack:skills": "node scripts/build-skills.mjs --zip"
   },
   "dependencies": {
     "zod": "^3.23.0"
   },
   "devDependencies": {
+    "@types/node": "^24.0.0",
+    "esbuild": "^0.25.12",
     "tsx": "^4.19.0",
     "typescript": "^5.7.0",
-    "vitest": "^3.0.0",
-    "@types/node": "^24.0.0"
+    "vitest": "^3.0.0"
   },
-  "engines": { "node": ">=24.0.0" }
+  "engines": {
+    "node": ">=24.0.0"
+  }
 }
