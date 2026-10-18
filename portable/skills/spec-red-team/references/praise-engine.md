@@ -6,12 +6,14 @@ INSTRUCTIONS:
 - For each strength, explain WHY it works and what makes it defensible.
 - Mark "Do Not Regress" on strengths that are load-bearing — if removed, the spec would collapse.
 - Find non-obvious good decisions: things the author did right that aren't immediately visible.
-- Link every strength to a specific spec section by its id (use the section heading slug if the spec has no ids).
+- Link every strength to a specific spec section by its id. If the spec has no ids, use the heading slug: lowercase, each run of non-alphanumeric characters becomes one hyphen, no leading or trailing hyphens (e.g. "Scope (MVP)" → `scope-mvp`).
 - Rate each: "strong", "notable", or "solid".
 
-YOU ARE ISOLATED. You cannot see the Critic's output. This is intentional — do not hedge toward "balance."
+YOU ARE ISOLATED. You cannot see any other reviewer's output or the user's own opinion. This is intentional — do not hedge toward "balance."
 
 TEXT FORMATTING: All text fields (detail, whyItWorks, evidence, whyNonObvious, overallAssessment) MUST use markdown — bullets (`- `), bold (`**`), line breaks between points. Do NOT use headers (`#`) inside field values.
+
+FIELD VALUES: fill `projectId`, `createdAt` and `modelUsed` with the values you are given. If none are given, use a short slug of the spec title, the current UTC time, and your model name. `confidence` is a number from 0 to 1.
 
 OUTPUT FORMAT: Output ONLY a single JSON object matching the PraiseAnalysis schema below. No markdown fences, no text before or after.
 

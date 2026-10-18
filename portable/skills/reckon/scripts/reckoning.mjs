@@ -292,6 +292,9 @@ var STRENGTH_RANK = {
   notable: 1,
   solid: 2
 };
+function indent(text) {
+  return text.split("\n").map((line) => line ? `  ${line}` : line).join("\n");
+}
 function renderVerdict(critical, praise) {
   const { verdict, reason } = deriveVerdict(critical);
   const lines = [];
@@ -309,15 +312,16 @@ function renderVerdict(critical, praise) {
     for (const s of strengths) {
       const badge = s.doNotRegress ? " \xB7 \u{1F512} DO NOT REGRESS" : "";
       lines.push(`- **${s.title}** [${s.strengthLevel}]${badge} \u2014 \xA7${s.prdSectionId}`);
-      lines.push(`  ${s.whyItWorks}`);
+      lines.push(indent(s.whyItWorks));
     }
     lines.push("");
     if (praise.nonObviousInsights.length > 0) {
       lines.push("## \u{1F4A1} Non-obvious insights");
       for (const n of praise.nonObviousInsights) {
         lines.push(`- **${n.title}** \u2014 \xA7${n.prdSectionId}`);
-        lines.push(`  ${n.detail}`);
-        lines.push(`  _Why it's non-obvious:_ ${n.whyNonObvious}`);
+        lines.push(indent(n.detail));
+        lines.push(indent(`_Why it's non-obvious:_
+${n.whyNonObvious}`));
       }
       lines.push("");
     }
@@ -328,18 +332,31 @@ function renderVerdict(critical, praise) {
   );
   for (const i of items) {
     lines.push(`- **[${i.severity}/${i.likelihood}] ${i.title}** (${i.category} \xB7 \xA7${i.prdSectionId})`);
-    lines.push(`  ${i.consequence}`);
+    lines.push(indent(i.consequence));
   }
   lines.push("");
   lines.push("## \u{1F9ED} Market skeptic");
   const ms = critical.marketSkeptic;
-  lines.push(`- **Why care?** [${ms.whyCare.verdict}] ${ms.whyCare.detail}`);
-  lines.push(`- **Why now?** [${ms.whyNow.verdict}] ${ms.whyNow.detail}`);
-  lines.push(`- **Why win?** [${ms.whyWin.verdict}] ${ms.whyWin.detail}`);
-  lines.push(`- **Feature or product?** [${ms.featureVsProduct.verdict}] ${ms.featureVsProduct.detail}`);
+  const questions = [
+    ["Why care?", ms.whyCare],
+    ["Why now?", ms.whyNow],
+    ["Why win?", ms.whyWin],
+    ["Feature or product?", ms.featureVsProduct]
+  ];
+  for (const [label, v] of questions) {
+    lines.push(`- **${label}** [${v.verdict}]`);
+    lines.push(indent(v.detail));
+  }
   lines.push("");
   lines.push("## \u{1F4CB} Overall");
   lines.push(critical.overallAssessment);
+  lines.push("");
+  lines.push(`- **Kill recommendation:** ${critical.killRecommendation.kill ? "yes" : "no"}`);
+  lines.push(indent(critical.killRecommendation.rationale));
+  if (praise) {
+    lines.push("- **Strongest case for it:**");
+    lines.push(indent(praise.overallAssessment));
+  }
   lines.push("");
   lines.push(
     praise ? `_Critic confidence: ${critical.confidence} \xB7 Praise confidence: ${praise.confidence}_` : `_Critic confidence: ${critical.confidence}_`

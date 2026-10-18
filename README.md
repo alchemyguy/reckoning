@@ -26,7 +26,7 @@ You'll be asked for your own take first. Then Reckoning dispatches two isolated 
 
 `/reckon` first asks whether your input is a **raw idea** or an **existing spec**:
 
-- **Raw idea** → Reckoning runs a short clarifying interview, drafts a PRD from your answers (flagging every assumption — no web research yet), shows you the draft, then red-teams it.
+- **Raw idea** → Reckoning runs a short clarifying interview, drafts a PRD from your answers (flagging every assumption — no web research yet), then red-teams it. You see the draft alongside the verdict, after you've given your own take.
 - **Existing spec** → it red-teams the spec you provide directly.
 
 Both paths end in the same isolated praise-vs-critic review, the cognitive-forcing pause, and a proceed/descope/kill verdict. See [`examples/forge-pulse/expected-prd.md`](examples/forge-pulse/expected-prd.md) for a Mode A draft PRD (drafted from the interview only — note the empty citations and flagged assumptions) and [`examples/forge-pulse/expected-verdict.md`](examples/forge-pulse/expected-verdict.md) for the verdict.

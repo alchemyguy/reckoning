@@ -30,7 +30,7 @@ Ask the user:
 Record their answer word for word. Do not reveal any analysis yet.
 
 ## Step 2: Critique
-Follow `references/critic-assassin.md` and give it only the spec text. If you can start a subagent or isolated task, run it there so the user's answer cannot bias it. The output is a CriticalAnalysis JSON object.
+Follow `references/critic-assassin.md` using only the spec text. If you can start a subagent or isolated task, run it there so the user's answer cannot bias it: give it the reference prompt, the spec text, `projectId` = the slug, `createdAt` = the current UTC time (`date -u +%Y-%m-%dT%H:%M:%SZ`) and `modelUsed` = your model name, and ask it to reply with only the JSON. If you can't, write the critique yourself without using the user's Step-1 answer. The output is a CriticalAnalysis JSON object.
 
 ## Step 3: Validate and render
 Create `.reckoning/` in the working directory if it doesn't exist (`mkdir -p .reckoning`). Write the JSON to `.reckoning/<slug>-critical.json`, then run:
@@ -43,4 +43,4 @@ If validation prints `INVALID`, fix the JSON using the listed errors and validat
 **No Node available?** Check the JSON yourself against the schema in the reference prompt and write the markdown by hand. Use these sections: verdict, failure modes sorted by severity, market skeptic, overall. Verdict rule: KILL if `killRecommendation.kill` is true; otherwise DESCOPE if there is any critical-severity item or two or more `weak` market verdicts; otherwise PROCEED.
 
 ## Step 4: Present
-Show the pre-mortem. Then add a short diff against the user's Step-1 worry: what the critique confirmed, what it found that they missed, and what it didn't back up. For the full balanced review with strengths, suggest the `spec-red-team` or `reckon` skill.
+Show the rendered pre-mortem as printed (don't rewrite it). Then add a short diff against the user's Step-1 worry: what the critique confirmed, what it found that they missed, and what it didn't back up. For the full balanced review with strengths, suggest the `spec-red-team` or `reckon` skill.

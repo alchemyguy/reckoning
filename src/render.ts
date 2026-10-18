@@ -1,4 +1,4 @@
-import type { CriticalAnalysis, CriticalItem } from './schemas/critical';
+import type { CriticalAnalysis, CriticalItem, MarketSkepticVerdict } from './schemas/critical';
 import type { PraiseAnalysis } from './schemas/praise';
 import { deriveVerdict, allItems } from './verdict';
 
@@ -14,6 +14,15 @@ const STRENGTH_RANK: Record<PraiseAnalysis['strengths'][number]['strengthLevel']
   notable: 1,
   solid: 2,
 };
+
+// Field values are markdown and often multi-line bullet lists, so every line is
+// indented to stay nested under its list item.
+function indent(text: string): string {
+  return text
+    .split('\n')
+    .map((line) => (line ? `  ${line}` : line))
+    .join('\n');
+}
 
 // Without `praise` this renders a critic-only pre-mortem (no strengths sections).
 export function renderVerdict(critical: CriticalAnalysis, praise?: PraiseAnalysis): string {
@@ -35,7 +44,7 @@ export function renderVerdict(critical: CriticalAnalysis, praise?: PraiseAnalysi
     for (const s of strengths) {
       const badge = s.doNotRegress ? ' · 🔒 DO NOT REGRESS' : '';
       lines.push(`- **${s.title}** [${s.strengthLevel}]${badge} — §${s.prdSectionId}`);
-      lines.push(`  ${s.whyItWorks}`);
+      lines.push(indent(s.whyItWorks));
     }
     lines.push('');
 
@@ -43,8 +52,8 @@ export function renderVerdict(critical: CriticalAnalysis, praise?: PraiseAnalysi
       lines.push('## 💡 Non-obvious insights');
       for (const n of praise.nonObviousInsights) {
         lines.push(`- **${n.title}** — §${n.prdSectionId}`);
-        lines.push(`  ${n.detail}`);
-        lines.push(`  _Why it's non-obvious:_ ${n.whyNonObvious}`);
+        lines.push(indent(n.detail));
+        lines.push(indent(`_Why it's non-obvious:_\n${n.whyNonObvious}`));
       }
       lines.push('');
     }
@@ -56,20 +65,33 @@ export function renderVerdict(critical: CriticalAnalysis, praise?: PraiseAnalysi
   );
   for (const i of items) {
     lines.push(`- **[${i.severity}/${i.likelihood}] ${i.title}** (${i.category} · §${i.prdSectionId})`);
-    lines.push(`  ${i.consequence}`);
+    lines.push(indent(i.consequence));
   }
   lines.push('');
 
   lines.push('## 🧭 Market skeptic');
   const ms = critical.marketSkeptic;
-  lines.push(`- **Why care?** [${ms.whyCare.verdict}] ${ms.whyCare.detail}`);
-  lines.push(`- **Why now?** [${ms.whyNow.verdict}] ${ms.whyNow.detail}`);
-  lines.push(`- **Why win?** [${ms.whyWin.verdict}] ${ms.whyWin.detail}`);
-  lines.push(`- **Feature or product?** [${ms.featureVsProduct.verdict}] ${ms.featureVsProduct.detail}`);
+  const questions: [string, MarketSkepticVerdict][] = [
+    ['Why care?', ms.whyCare],
+    ['Why now?', ms.whyNow],
+    ['Why win?', ms.whyWin],
+    ['Feature or product?', ms.featureVsProduct],
+  ];
+  for (const [label, v] of questions) {
+    lines.push(`- **${label}** [${v.verdict}]`);
+    lines.push(indent(v.detail));
+  }
   lines.push('');
 
   lines.push('## 📋 Overall');
   lines.push(critical.overallAssessment);
+  lines.push('');
+  lines.push(`- **Kill recommendation:** ${critical.killRecommendation.kill ? 'yes' : 'no'}`);
+  lines.push(indent(critical.killRecommendation.rationale));
+  if (praise) {
+    lines.push('- **Strongest case for it:**');
+    lines.push(indent(praise.overallAssessment));
+  }
   lines.push('');
   lines.push(
     praise

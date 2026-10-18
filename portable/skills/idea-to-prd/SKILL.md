@@ -25,7 +25,7 @@ Interview the user before drafting. Ask **4–8 questions per round** about: tar
 Use a structured question tool if you have one. Otherwise ask in plain chat and wait for the answers.
 
 ## Step 2: Draft the PRD
-Follow `references/synthesizer.md` and give it only the idea and the full Q&A transcript. If you can start a subagent or isolated task, run the drafting there. Otherwise follow the prompt directly. The output is a PRDDocument JSON built only from the user's answers: empty citations, assumptions flagged.
+Follow `references/synthesizer.md` using only the idea and the full Q&A transcript. If you can start a subagent or isolated task, run the drafting there: give it the reference prompt, the idea, the transcript, `projectId` = the slug and `createdAt` = the current UTC time (`date -u +%Y-%m-%dT%H:%M:%SZ`), and ask it to reply with only the JSON. Otherwise follow the prompt directly. The output is a PRDDocument JSON built only from the user's answers: empty citations, assumptions flagged.
 
 Derive a short slug (lowercase, hyphens) from the idea, create `.reckoning/` in the working directory if it doesn't exist (`mkdir -p .reckoning`), and write the JSON to `.reckoning/<slug>-prd.json`.
 
@@ -39,4 +39,4 @@ If validation prints `INVALID`, fix the JSON using the listed errors and validat
 **No Node available?** Check the JSON yourself against the schema in `references/synthesizer.md`, then write the markdown by hand in the format of `examples/expected-prd.md`.
 
 ## Step 4: Present
-Show the rendered draft. List the lowest-confidence sections and the flagged assumptions as the things to validate first. Offer to red-team the draft next (the `spec-red-team` or `reckon` skill).
+Show the rendered draft as printed. List the lowest-confidence sections and the flagged assumptions as the things to validate first. Offer to red-team the draft next (the `spec-red-team` or `reckon` skill).

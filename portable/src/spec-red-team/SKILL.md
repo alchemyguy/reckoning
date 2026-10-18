@@ -18,7 +18,7 @@ Files in this skill (paths are relative to this SKILL.md):
 - `references/praise-engine.md`: prompt for the strengths analyst. Returns PraiseAnalysis JSON.
 - `references/critic-assassin.md`: prompt for the critic. Returns CriticalAnalysis JSON.
 - `scripts/reckoning.mjs`: short, readable, dependency-free validator and renderer (Node 18+).
-- `examples/expected-verdict.md`: what a finished verdict looks like.
+- `examples/expected-verdict.md`: what a finished verdict looks like (format only: that example's spec quoted research findings, so its reviews cite them; yours must stick to what your spec says).
 
 ## Step 0: Get the spec
 - If the user gave a file path, read it. Reject paths outside the current project (no `..` traversal, no absolute paths that leave it).
@@ -33,8 +33,11 @@ Record their answer word for word. Do not generate or reveal any AI analysis yet
 
 ## Step 2: Isolated adversarial review
 Run the two analyses so neither can see the other's output or the user's Step-1 answer:
-- **If you can start subagents or isolated tasks**, start two in parallel. Give each one only the spec text plus its reference prompt: `references/praise-engine.md` and `references/critic-assassin.md`.
-- **If you cannot**, run them one after the other as separate passes. Before each pass, set aside everything except the spec and that pass's reference prompt. Do not let the first pass's findings shape the second. Run the critic first. In Step 4, tell the user the review ran without true isolation.
+- **If you can start subagents or isolated tasks**, start two in parallel: one with `references/praise-engine.md`, one with `references/critic-assassin.md`.
+- **If you cannot**, run them one after the other as separate passes, critic first. Before each pass, re-read only the spec and that pass's reference prompt, and do not use the user's Step-1 answer or the other pass's findings. Start your Step 4 output with this line:
+  > Note: no isolated subagents were available, so these reviews ran one after the other in the same session and the second pass could see the first.
+
+**What to give a review agent:** its reference prompt, the spec text, and three values: `projectId` = the slug, `createdAt` = the current UTC time (`date -u +%Y-%m-%dT%H:%M:%SZ`), `modelUsed` = your model name. Nothing else: not the user's answer, not the other review. Ask it to reply with only the JSON, and save that reply unchanged.
 
 ## Step 3: Validate and render
 1. Create `.reckoning/` in the working directory if it doesn't exist (`mkdir -p .reckoning`). Write each JSON result there: `.reckoning/<slug>-critical.json` and `.reckoning/<slug>-praise.json`.
@@ -49,8 +52,8 @@ Run the two analyses so neither can see the other's output or the user's Step-1 
    node <skill-dir>/scripts/reckoning.mjs render .reckoning/<slug>-critical.json .reckoning/<slug>-praise.json
    ```
 
-**No Node available?** Check each JSON yourself against the schema in its reference prompt. Then write the verdict by hand in the format of `examples/expected-verdict.md`, with this verdict rule: KILL if `killRecommendation.kill` is true; otherwise DESCOPE if there is any critical-severity item or two or more `weak` market verdicts; otherwise PROCEED.
+**No Node available?** Check each JSON yourself against the schema in its reference prompt. Then write the verdict by hand following the section structure of `examples/expected-verdict.md` (skim it; it is long), with this verdict rule: KILL if `killRecommendation.kill` is true; otherwise DESCOPE if there is any critical-severity item or two or more `weak` market verdicts; otherwise PROCEED.
 
 ## Step 4: Present
-- Show the rendered verdict.
+- Show the rendered verdict as printed (it is the deliverable; don't rewrite it).
 - Then add a short **cognitive-forcing diff** that compares the user's Step-1 answer with the findings: what they flagged that the AI confirmed, what the AI found that they missed, and where they disagree.
