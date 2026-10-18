@@ -9,11 +9,12 @@ Agensi format notes (checked 2026-10-18):
 - Their guidance for pricing: **$3–9** for single-purpose skills and **$12–25** for comprehensive multi-file skills. Publishing one or two free skills first builds credibility.
 - Comparable listings at the time of checking: "sdd kit" (free; audits specs, ADRs and plans for contradictions) and "Product Manager Engine" (free). Neither has isolated praise vs. critic review, the commit-your-take-first step, or a kill verdict.
 
-Pricing is still **TBD**. See "Open decision" at the bottom before you set any price.
+**Price: Free for all four skills** (decided 2026-10-18). See "Pricing decision" at the bottom.
 
 ---
 
 ## reckon (flagship)
+- **Price:** Free
 - **Title:** Reckon: Make AI Attack Your Spec, Not Flatter It
 - **Tagline:** Turns a raw idea or an existing PRD into a proceed / descope / kill verdict. It uses isolated bull-case and bear-case reviews and makes you commit your own take first.
 - **Category:** Research & Analysis (alternative: Business & Operations)
@@ -30,6 +31,7 @@ Pricing is still **TBD**. See "Open decision" at the bottom before you set any p
     - What does "kill" mean? It's reserved for fundamentally flawed ideas, not fixable problems.
 
 ## spec-red-team
+- **Price:** Free
 - **Title:** Spec Red-Team: Isolated Bull vs. Bear Review for PRDs
 - **Tagline:** Paste a spec and get a strongest-case vs. harshest-case review that is severity-ranked and ends in a proceed / descope / kill call.
 - **Category:** Research & Analysis
@@ -37,6 +39,7 @@ Pricing is still **TBD**. See "Open decision" at the bottom before you set any p
 - **Description:** Mode B of Reckon on its own. Same isolation, same commit-your-take-first step, same verdict. For teams that already have a spec.
 
 ## idea-to-prd
+- **Price:** Free
 - **Title:** Idea to PRD: An Honest Draft With Every Assumption Flagged
 - **Tagline:** A short clarifying interview turns a one-liner into a structured PRD with per-section confidence scores. It never invents market data or sources.
 - **Category:** Business & Operations (alternative: Technical Documentation)
@@ -44,6 +47,7 @@ Pricing is still **TBD**. See "Open decision" at the bottom before you set any p
 - **Description:** It covers 7 sections: problem, personas, scope and non-goals, success metrics, user stories, technical considerations, and risks. Assumptions and contradictions are listed explicitly, so you know what to validate first.
 
 ## spec-premortem
+- **Price:** Free
 - **Title:** Spec Pre-mortem: Every Way Your Plan Could Fail
 - **Tagline:** A harsh critic ranks failure modes by severity and likelihood, runs a market-skeptic check (why care, why now, why win, feature or product), and gives a kill-or-proceed call.
 - **Category:** Research & Analysis
@@ -52,13 +56,10 @@ Pricing is still **TBD**. See "Open decision" at the bottom before you set any p
 
 ---
 
-## Open decision: free vs paid (the owner decides)
-Agensi's terms (checked 2026-10-18) matter here:
-- Buyers get a personal, non-transferable license (§8.2).
-- Refunds have **no time limit** (§5.5).
-- Listings may not promote paid versions sold off-platform (§6.3a).
+## Pricing decision: free (decided 2026-10-18)
+All four skills are listed **free**. Reasons:
+- They're already free under MIT in this public repo.
+- Agensi's terms rule out a clean paid listing: buyer refunds have no time limit (§5.5), and listings may not promote paid versions sold off-platform (§6.3a).
+- Agensi advises building credibility with free skills first.
 
-All four skills are also free under MIT in this public repo. So:
-- **Option A: list them all free.** This fits Agensi's advice to build credibility with free skills, and it carries no conflict with the MIT license. Revenue would come later from a paid skill that isn't in this repo, such as Reckon with web research.
-- **Option B: paid flagship, free others.** For example, `reckon` around $12–15 with the other three free. Expect buyers to find the free GitHub copy, combined with refunds that never expire.
-- **Option C: paid.** Move the paid skills out of the MIT repo, or change their license, first.
+Revenue, if wanted later, comes from a new paid skill that is **not** in this MIT repo, such as Reckon with web research.
